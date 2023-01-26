@@ -1,0 +1,14 @@
+{
+    "members":[
+        {   "url":"IshaanSaraswat2.jpg",
+            "first_name":"Ishaan",
+            "last_name": "Saraswat",
+            "star": "*"
+        },
+        {   "url":"musk.jpg",
+            "first_name":"Elon",
+            "last_name": "Musk",
+            "star": "*"
+        }
+    ]
+}
