@@ -1,10 +1,14 @@
 
+import Home from "./components/Pages/Skills&Sharing/Home";
+import Navbar from "./components/Common/Navbar and Footer/Navbar";
+import Header from "./components/Common/Navbar and Footer/Header"
 
 function App() {
   return (
-    <div>
-    Hello World
-    </div>
+    <>
+      <Header />
+      <Home />
+    </>
   );
 }
 
