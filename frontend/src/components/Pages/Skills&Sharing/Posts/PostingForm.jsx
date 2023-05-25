@@ -1,25 +1,22 @@
 import React from 'react';
 import Posts from './Posts';
 import Combar from '../Modal/Comments/Combar';
+import { useFetchUserInfoQuery } from '../../../../redux/slices/sspost';
 
 export default function Post() {
 
-  const user = useSelector((state) => state.posts.userInfo);
-  const loading = useSelector((state) => state.posts.loading);
+  const { data, isLoading, isError } = useFetchUserInfoQuery("64356264fb99aceedccc28d2");
 
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    // Fetch user info when the component mounts
-    dispatch(fetchUserInfo());
-  }, [dispatch]);
+  console.log(data)
 
-  if (loading) {
-    return <p>Loading...</p>;
+  const user = data
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
-  if (!userInfo) {
-    return <p>No user data available.</p>;
+  if (isError) {
+    return <div>Error: {isError.message}</div>;
   }
 
 
@@ -27,7 +24,7 @@ export default function Post() {
     <div className='h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden'>
 
       <div className='bg-[#ffffff] mx-3 my-6 rounded-xl p-5  m-w-[700px] border-none shadow shadow-gray-500  '>
-        <h1 className='text-xl'>Good Morning , {user.firstName} </h1>
+        <h1 className='text-xl'>Good Morning ,  {user.data.firstName} </h1>
         <p className='text-sm'>Time to Share What U Have Got </p>
 
 

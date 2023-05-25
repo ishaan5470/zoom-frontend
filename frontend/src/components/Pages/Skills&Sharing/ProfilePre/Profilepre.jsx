@@ -1,24 +1,24 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserInfo } from "../../../../redux/slices/sspost"
-
+import React from 'react'
+import { useFetchUserInfoQuery } from '../../../../redux/slices/sspost';
 export default function Profilepre() {
 
-  const user = useSelector((state) => state.posts.userInfo);
-  const loading = useSelector((state) => state.posts.loading);
+  const { data, isLoading, isError } = useFetchUserInfoQuery("64356264fb99aceedccc28d2");
 
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchUserInfo());
-  }, [dispatch]);
+  console.log(data)
 
-  if (loading) {
-    return <p>Loading...</p>;
+  const user = data
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
-  if (!user) {
-    return <p>No user data available.</p>;
+
+  if (isError) {
+    return <div>Error: {isError.message}</div>;
   }
+
+
+
+
 
 
 
@@ -30,7 +30,7 @@ export default function Profilepre() {
         <div className=''>
 
           <div className=' w-[110px] h-[110px] mx-1 object-cover bg-transparent rounded-[100px]'><img src='/Images/profilePic.png' className='rounded-[150px] w-full h-full object-cover' alt='Pfimg' /></div>
-          <h1 className='mt-2 text-lg '>{user.firstName + " " + user.lastName}</h1>
+          <h1 className='mt-2 text-lg '>{user.data.firstName + " " + user.data.lastName}</h1>
 
         </div>
         <div className='w-[90px] h-[90px] bg-white mr-4 mt-1'>
@@ -39,7 +39,7 @@ export default function Profilepre() {
       </div>
 
       <div className='mt-2 font-light'>
-        {user.profile}
+        {user.data.profile}
       </div>
 
 
