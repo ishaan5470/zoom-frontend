@@ -1,14 +1,16 @@
 import React from 'react';
 import Posts from './Posts';
 import Combar from '../Modal/Comments/Combar';
-import { useFetchUserInfoQuery } from '../../../../redux/slices/sspost';
+import { useFetchUserInfoQuery, useFetchPostsQuery } from '../../../../redux/slices/sspost';
 
 export default function Post() {
 
   const { data, isLoading, isError } = useFetchUserInfoQuery("64356264fb99aceedccc28d2");
 
+  const { data: data1, isLoading: load, isError: err } = useFetchPostsQuery();
 
-  console.log(data)
+
+  console.log(data1)
 
   const user = data
   if (isLoading) {
@@ -18,6 +20,7 @@ export default function Post() {
   if (isError) {
     return <div>Error: {isError.message}</div>;
   }
+
 
 
   return (
@@ -31,16 +34,12 @@ export default function Post() {
       </div>
       <hr className='separator my-4 mx-auto w-[600px] h-0 border-none border-b border-black' />
       <div className='bg-[#fff] mx-3 my-3 rounded-xl pt-2 pb-2 px-5 z-50 max-w-[700px] border-none shadow shadow-gray-500'>
-        <Posts />
-
-        <Combar />
-        <Posts />
-        <Combar />
-        <Posts />
-        <Combar />
-        <Posts />
-        <Combar />
-        <Posts />
+        {data1.data.data.map((post) => (
+          <React.Fragment key={post._id}>
+            <Posts post={post} />
+            <Combar />
+          </React.Fragment>
+        ))}
       </div>
 
 

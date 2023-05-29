@@ -4,7 +4,17 @@ import Like from '../Modal/Followers/Like';
 import Postype from '../Modal/NewPost/Postype';
 import Comment from '../Modal/Comments/Comment';
 
-export default function Posts() {
+export default function Posts({ post }) {
+
+  const handleLike = () => {
+
+  }
+
+  const createdDate = new Date(post.createdAt);
+  const currentDate = new Date();
+
+  const timeDifference = Math.floor((currentDate - createdDate) / (1000 * 60 * 60)); // Calculating the time difference in hours
+
   return (
     <div >
       <div className='bg-[#f1f1f1] rounded-xl  m-w-[650px] py-4 m-auto my-6 shadow shadow-gray-700'>
@@ -15,12 +25,13 @@ export default function Posts() {
 
           <div className=' w-[50px] h-[50px] mx-1 object-cover bg-transparent rounded-[100px]'><img src='/Images/profilePic.png' className='rounded-[150px] w-full h-full object-cover' alt='Pfimg' /></div>
           <div className='ml-[1rem]'>
-            <h1 className='font-semibold'> Name </h1>
-            <p className=''> SomeThing</p>
+            <h1 className='font-semibold'> {post.postName} </h1>
+            <p className=''> {timeDifference}</p>
           </div>
 
           < button class="border-2 rounded-full px-3 py-1 ml-2">
-            + follow
+            + support
+
           </button>
           <Dropdown />
 
@@ -28,19 +39,23 @@ export default function Posts() {
         <div className='mx-4'>
 
           <p className='text-black font-light w-full text-[1rem]   '>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at dictum ex, pllacerat lacerat lacerat lacerat acerat justo. Orci varius natoque penatibus et magnis dis parturient mont.</p>
+            {post.description}
+          </p>
         </div>
 
 
-        <div className='  h-[350px] sm:h-[500px] m-w-[650px] bg-gray-600 mt-4 mb-4'><img src='/Images/post.png' className='w-full h-full object-cover' alt='Pfimg' /></div>
+        <div className='  h-[350px] sm:h-[500px] m-w-[650px] bg-gray-600 mt-4 mb-4'>
+          <img src={post.image} className='w-full h-full object-cover' alt='PostImg' />
+        </div>
+
         <div className='flex items-center justify-between mx-[20px]'>
           <span className='flex justify-center items-center relative gap-2 font-bold text-base'>
 
-            <img src='Images/yo.svg' alt='yo' />
+            <img onClick={handleLike} src='Images/yo.svg' alt='yo' />
             {/* <div className='absolute bg-[#57a7b3] h-4 w-4 text-xs rounded-[50px] object-contain flex items-center justify-center -right-3 -top-1 text-white'>3</div> */}
-            <Like />
+            <Like like={post.likes} />
           </span>
-          <Comment />
+          <Comment com={post.comment} />
           <Postype />
           <span className=' flex items-center justify-center text-base gap-2  font-bold'>
 
