@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const posts = createApi({
   reducerPath: 'posts',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000' }),
+  tagTypes: ['Post', 'User'],
   endpoints: (builder) => ({
     fetchPosts: builder.query({
       query: () => ({
@@ -13,13 +14,6 @@ export const posts = createApi({
         ...result.data.data.map(({ _id }) => ({ type: 'Post', _id }))
       ]
 
-    }),
-    updateFollowersInfo: builder.mutation({
-      query: (data) => ({
-        url: `users/${data.userId}/followers`,
-        method: 'PUT',
-        body: data,
-      }),
     }),
     // fetchUserInfo: builder.query({
     //   query: (Id) => ({
@@ -62,14 +56,15 @@ export const posts = createApi({
     }),
     followUser: builder.mutation({
       query: (data) => ({
-        url: `users/${data.userId}/follow`,
+        url: `/users/follow`,
         method: 'POST',
         body: data,
       }),
     }),
     addLikeToPost: builder.mutation({
       query: (data) => ({
-        url: `posts/${data.postId}/like`,
+        url: `/users/addLike`,
+
         method: 'POST',
         body: data,
       }),
@@ -77,7 +72,7 @@ export const posts = createApi({
     }),
     addCommentToPost: builder.mutation({
       query: (data) => ({
-        url: `posts/${data.postId}/comment`,
+        url: `/users/addComment`,
         method: 'POST',
         body: data,
       }),
@@ -86,7 +81,7 @@ export const posts = createApi({
     }),
     editPost: builder.mutation({
       query: (data) => ({
-        url: `posts/${data.postId}`,
+        url: `/users/editMyPost`,
         method: 'PUT',
         body: data,
       }),
@@ -95,7 +90,7 @@ export const posts = createApi({
     }),
     deletePost: builder.mutation({
       query: (postId) => ({
-        url: `posts/${postId}`,
+        url: `posts/deleteMyPost`,
         method: 'DELETE',
         invalidatesTags: ['Post']
       }),
@@ -103,5 +98,5 @@ export const posts = createApi({
   }),
 });
 
-export const { useFetchPostsQuery, useFetchHomeInfoQuery, useUpdateFollowersInfoMutation, useFetchUserInfoQuery, useCreatePostMutation, useFollowUserMutation, useAddLikeToPostMutation, useAddCommentToPostMutation, useEditPostMutation, useDeletePostMutation } = posts;
+export const { useFetchPostsQuery, useFetchHomeInfoQuery, useFetchUserInfoQuery, useCreatePostMutation, useFollowUserMutation, useAddLikeToPostMutation, useAddCommentToPostMutation, useEditPostMutation, useDeletePostMutation } = posts;
 

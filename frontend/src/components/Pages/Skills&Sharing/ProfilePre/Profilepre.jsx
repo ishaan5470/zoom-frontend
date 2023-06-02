@@ -24,7 +24,7 @@ export default function Profilepre() {
 
   return (
 
-    <div className='bg-[#fff] rounded-xl mt-6 p-5 w-[350px] h-[800px] shadow top-[120px]  shadow-gray-500 xl:flex xl:flex-col hidden '>
+    <div className='bg-[#fff] rounded-xl mt-6 p-5 w-[350px] h-[700px] shadow top-[120px]  shadow-gray-500 xl:flex xl:flex-col hidden '>
 
       <div className='flex justify-between content-center mt-1'>
         <div className=''>
