@@ -4,18 +4,19 @@ import { RxCross1 } from "react-icons/rx";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useState } from "react";
 import GoogleIcon from '@mui/icons-material/Google';
-// import { useUserLoginMutation } from "../../../redux/slices/login";
-import { useFakePostQuery } from "../../../redux/slices/login";
+import { useUserLoginMutation } from "../../../redux/slices/login";
+// import { useFakePostQuery } from "../../../redux/slices/login";
 
 
 
 export default function Login() {
 
-  // const [login,{data,isLoading,isError,error}] = useUserLoginMutation();
+  const [login, data] = useUserLoginMutation();
 
-  const { data } = useFakePostQuery();
+  // const { data } = useFakePostQuery();
+  console.log(data.isLoading)
+
   console.log(data)
-
   const navigate = useNavigate();
   const [passwordVisibilityFlag, setpasswordVisibilityFlag] = useState(false);
   const [input, setInput] = useState({
@@ -29,11 +30,11 @@ export default function Login() {
     setInput({ ...input, [nameOfInput]: e.target.value })
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    // await login(input);
+    login(input);
     console.log(input);
-    // console.log(data);
+    console.log(data);
     // navigate("/user",{state:{data,isLoading,isError,error}});
   }
 
