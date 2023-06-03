@@ -1,37 +1,42 @@
 import React from "react";
-import { Link,  useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RxCross1 } from "react-icons/rx";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useState } from "react";
 import GoogleIcon from '@mui/icons-material/Google';
 // import { useUserLoginMutation } from "../../../redux/slices/login";
+import { useFakePostQuery } from "../../../redux/slices/login";
 
 
 
 export default function Login() {
 
   // const [login,{data,isLoading,isError,error}] = useUserLoginMutation();
+
+  const { data } = useFakePostQuery();
+  console.log(data)
+
   const navigate = useNavigate();
   const [passwordVisibilityFlag, setpasswordVisibilityFlag] = useState(false);
-  const [input,setInput]= useState({
-    userName:"",
-    password:""
+  const [input, setInput] = useState({
+    userName: "",
+    password: ""
   });
-  
 
-  const handleChange=(e)=>{
-    const nameOfInput=e.target.name;
-    setInput({...input,[nameOfInput]:e.target.value})
+
+  const handleChange = (e) => {
+    const nameOfInput = e.target.name;
+    setInput({ ...input, [nameOfInput]: e.target.value })
   }
 
-  async function handleSubmit(e){
-      e.preventDefault();
-        // await login(input);
-        console.log(input);
-        // console.log(data);
-        // navigate("/user",{state:{data,isLoading,isError,error}});
-      }
-  
+  async function handleSubmit(e) {
+    e.preventDefault();
+    // await login(input);
+    console.log(input);
+    // console.log(data);
+    // navigate("/user",{state:{data,isLoading,isError,error}});
+  }
+
 
   function handlePasswordVisibility(e) {
     e.preventDefault();
@@ -112,7 +117,7 @@ export default function Login() {
               <div className="flex justify-center items-center gap-2 mb-4">
                 <p className="font-light">Don't have an Account?</p>
                 <Link to="/signUp">
-                <p className="text-blue-600 hover:text-red-600 ">Sign Up</p>
+                  <p className="text-blue-600 hover:text-red-600 ">Sign Up</p>
                 </Link>
               </div>
             </div>

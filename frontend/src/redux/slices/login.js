@@ -1,9 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const login = createApi({
-    reducerPath:'login',
-    baseQuery:fetchBaseQuery({baseUrl:'https://jsonplaceholder.typicode.com/'}),
-    endpoints:(builder)=>({
+    reducerPath: 'login',
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://jsonplaceholder.typicode.com/' }),
+
+    tagTypes: ['User'],
+    endpoints: (builder) => ({
         // userLogin:builder.mutation({
         //     query:(data)=>({
         //         url:'/login/',
@@ -14,12 +16,12 @@ export const login = createApi({
         // getUser:builder.query({
         //     query:()=>"/login/getAllUser",
         // }),
-        getFakePosts:builder.query({
-            query:()=>"posts"
-        }), providesTags:['User']
+        fakePost: builder.query({
+            query: () => "posts"
+        }), providesTags: ['User']
     }),
 })
 
 
 
-export const {useGetFakePostsQuery} = login;
+export const { useFakePostQuery } = login;
