@@ -4,8 +4,8 @@ import Navbar from "./components/Common/Navbar and Footer/Navbar";
 import Header from "./components/Common/Navbar and Footer/Header"
 import { Route,Routes } from "react-router-dom";
 import Login from "./components/Common/Login and SignUp/Login";
-import UsersPage from "./components/Pages/UsersPage";
 
+import VisitUserProfile from "./components/Pages/ProfilePage/UserProfilePage"
 function App() {
   return (
     <>
@@ -13,8 +13,9 @@ function App() {
      <Routes>
       <Route path="/posts" element={<Home />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/user" element={<UsersPage />} />
       </Routes>
+      {/* <Home /> */}
+      {/* <VisitUserProfile /> */}
     </>
   );
 }

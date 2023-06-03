@@ -16,7 +16,7 @@ export const login = createApi({
         // }),
         getFakePosts:builder.query({
             query:()=>"posts"
-        }),
+        }), providesTags:['User']
     }),
 })
 

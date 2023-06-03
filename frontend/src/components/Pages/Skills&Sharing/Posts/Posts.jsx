@@ -1,23 +1,78 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Dropdown from './Dropdown/Dropdown';
 import Like from '../Modal/Followers/Like';
 import Postype from '../Modal/NewPost/Postype';
 import Comment from '../Modal/Comments/Comment';
+import { useAddLikeToPostMutation } from '../../../../redux/slices/sspost';
 
-export default function Posts({ post }) {
 
-  const handleLike = () => {
+export default function Posts({ post, pid, uid }) {
 
+
+
+  console.log(post)
+
+  const [time, setTime] = useState(null);
+
+  const [like, setlike] = useState(false);
+
+  const [handleLike, data] = useAddLikeToPostMutation()
+
+
+
+  const updateLike = () => {
+    handleLike({ postid: post._id, userid: uid })
   }
 
-  const createdDate = new Date(post.createdAt);
-  const currentDate = new Date();
+  const checkLike = () => {
+    const initLike = post.likes.includes(uid)
+    setlike(initLike)
+  }
 
-  const timeDifference = Math.floor((currentDate - createdDate) / (1000 * 60 * 60)); // Calculating the time difference in hours
+  useEffect(() => {
 
+    checkLike();
+
+  }, [post.likes, uid])
+
+
+  function calculateTimeDifference() {
+
+    const createdDate = new Date(post.createdAt);
+    const currentDate = new Date();
+    const timeDifferenceMinutes = Math.floor((currentDate - createdDate) / (1000 * 60)); // Calculating the time difference in minutes
+
+    const timeDifferenceHours = Math.floor(timeDifferenceMinutes / 60); // Calculating the time difference in hours
+    const timeDifferenceDays = Math.floor(timeDifferenceHours / 24); // Calculating the time difference in days
+    const timeDifferenceWeeks = Math.floor(timeDifferenceDays / 7); // Calculating the time difference in weeks
+    const timeDifferenceMonths = Math.floor(timeDifferenceDays / 30); // Calculating the time difference in months
+    const timeDifferenceYears = Math.floor(timeDifferenceDays / 365); // Calculating the time difference in years
+
+    let timeDifferenceFormatted;
+    if (timeDifferenceYears >= 1) {
+      timeDifferenceFormatted = timeDifferenceYears + " year(s)";
+    } else if (timeDifferenceMonths >= 4) {
+      timeDifferenceFormatted = "More than 3 months";
+    } else if (timeDifferenceWeeks >= 7) {
+      timeDifferenceFormatted = "More than 6 weeks";
+    } else if (timeDifferenceDays >= 24) {
+      const weeks = Math.floor(timeDifferenceDays / 7);
+      timeDifferenceFormatted = weeks + " week(s)";
+    } else if (timeDifferenceHours >= 24) {
+      timeDifferenceFormatted = timeDifferenceDays + " day(s)";
+    } else if (timeDifferenceMinutes >= 60) {
+      timeDifferenceFormatted = timeDifferenceHours + " hour(s)";
+    } else {
+      timeDifferenceFormatted = timeDifferenceMinutes + " minute(s)";
+    }
+
+    setTime(timeDifferenceFormatted)
+  }
+  // Update the time difference every second (1000 milliseconds)
+  setInterval(calculateTimeDifference, 1000);
   return (
     <div >
-      <div className='bg-[#f1f1f1] rounded-xl  m-w-[650px] py-4 m-auto my-6 shadow shadow-gray-700'>
+      <div className='bg-[#f1f1f1] rounded-xl  m-w-[700px] py-4 m-auto my-6 shadow shadow-gray-700'>
 
         <div className='flex justify-start items-center mb-2 mx-4 '>
 
@@ -26,7 +81,7 @@ export default function Posts({ post }) {
           <div className=' w-[50px] h-[50px] mx-1 object-cover bg-transparent rounded-[100px]'><img src='/Images/profilePic.png' className='rounded-[150px] w-full h-full object-cover' alt='Pfimg' /></div>
           <div className='ml-[1rem]'>
             <h1 className='font-semibold'> {post.postName} </h1>
-            <p className=''> {timeDifference}</p>
+            <p className=''> {time}</p>
           </div>
 
           < button class="border-2 rounded-full px-3 py-1 ml-2">
@@ -44,18 +99,18 @@ export default function Posts({ post }) {
         </div>
 
 
-        <div className='  h-[350px] sm:h-[500px] m-w-[650px] bg-gray-600 mt-4 mb-4'>
+        <div className='  h-[350px] sm:h-[500px] m-w-[700px] bg-gray-600 mt-4 mb-4'>
           <img src={post.image} className='w-full h-full object-cover' alt='PostImg' />
         </div>
 
         <div className='flex items-center justify-between mx-[20px]'>
           <span className='flex justify-center items-center relative gap-2 font-bold text-base'>
 
-            <img onClick={handleLike} src='Images/yo.svg' alt='yo' />
+            {like ? <div onClick={updateLike} className="">Liked</div> : <img onClick={updateLike} src='Images/yo.svg' alt='yo' />}
             {/* <div className='absolute bg-[#57a7b3] h-4 w-4 text-xs rounded-[50px] object-contain flex items-center justify-center -right-3 -top-1 text-white'>3</div> */}
-            <Like like={post.likes} />
+            <Like like={post.likes} usid={post.userid} />
           </span>
-          <Comment com={post.comment} />
+          <Comment com={post.comment} pid={pid} uid={uid} />
           <Postype />
           <span className=' flex items-center justify-center text-base gap-2  font-bold'>
 
