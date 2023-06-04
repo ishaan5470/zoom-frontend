@@ -5,37 +5,43 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useState } from "react";
 import GoogleIcon from '@mui/icons-material/Google';
 import { useUserLoginMutation } from "../../../redux/slices/login";
-// import { useFakePostQuery } from "../../../redux/slices/login";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../../redux/slices/userSlice";
 
 
 
 export default function Login() {
 
-  const [login, data] = useUserLoginMutation();
-
-  // const { data } = useFakePostQuery();
-  console.log(data.isLoading)
-
+  const [login, {data,isLoading,isSuccess}] = useUserLoginMutation();
+  console.log(isLoading)
   console.log(data)
+
+  const dispatch = useDispatch();
+  
   const navigate = useNavigate();
-  const [passwordVisibilityFlag, setpasswordVisibilityFlag] = useState(false);
-  const [input, setInput] = useState({
+  const initialInput = {
     userName: "",
     password: ""
-  });
-
+  }
+  const [passwordVisibilityFlag, setpasswordVisibilityFlag] = useState(false);
+  const [input, setInput] = useState(initialInput);
 
   const handleChange = (e) => {
     const nameOfInput = e.target.name;
     setInput({ ...input, [nameOfInput]: e.target.value })
   }
 
+
   function handleSubmit(e) {
     e.preventDefault();
-    login(input);
     console.log(input);
+    login(input);
     console.log(data);
-    // navigate("/user",{state:{data,isLoading,isError,error}});
+    setInput(initialInput);
+    if(isSuccess){
+      dispatch(addUser({id:data.user._id,userName:data.user.userName}));
+      navigate("/user");
+    }
   }
 
 

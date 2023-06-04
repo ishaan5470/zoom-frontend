@@ -11,14 +11,8 @@ export const login = createApi({
                 url: '/login',
                 method: 'POST',
                 body: data
-            })
+            }),keepUnusedDataFor:120
         }),
-        // getUser:builder.query({
-        //     query:()=>"/login/getAllUser",
-        // }),
-        // fakePost: builder.query({
-        //     query: () => "posts"
-        // }), providesTags: ['User']
     }),
 })
 

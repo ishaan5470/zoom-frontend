@@ -15,7 +15,7 @@ const UsersSignup = () => {
         method: 'post',
         url: url,
         data: { number: numberref.current.value }
-      }
+      } 
       let response = await axios(option);
       let record = response.data
       if (record.statusText === 'Success') {
