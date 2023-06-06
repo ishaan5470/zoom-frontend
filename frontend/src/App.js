@@ -8,6 +8,7 @@ import UsersSignup from "./components/Common/Login and SignUp/UsersSignup";
 
 
 import VisitUserProfile from "./components/Pages/ProfilePage/UserProfilePage"
+import Notification from "./components/Pages/Notification/Notification";
 function App() {
   return (
     <>
@@ -19,6 +20,7 @@ function App() {
       </Routes>
       {/* <Home /> */}
       {/* <VisitUserProfile /> */}
+      <Notification/>
     </>
   );
 }
