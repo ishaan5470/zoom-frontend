@@ -3,7 +3,7 @@ import Dropdown from './Dropdown/Dropdown';
 import Like from '../Modal/Followers/Like';
 import Postype from '../Modal/NewPost/Postype';
 import Comment from '../Modal/Comments/Comment';
-import { useAddLikeToPostMutation } from '../../../../redux/slices/sspost';
+import { useAddLikeToPostMutation } from '../../../../redux/api/sspost';
 
 
 export default function Posts({ post, pid, uid }) {

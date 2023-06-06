@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { InsertEmoticon, Send } from '@mui/icons-material';
-import { useAddCommentToPostMutation } from '../../../../../redux/slices/sspost';
+import { useAddCommentToPostMutation } from '../../../../../redux/api/sspost';
 
 function Combar({ pid, uid }) {
   const [inputValue, setInputValue] = useState('');

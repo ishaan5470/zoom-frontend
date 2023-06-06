@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 
-export const login = createApi({
+export const signUp = createApi({
     reducerPath: 'signUp',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/registeration',
     // prepareHeaders: (headers, { getState }) => {
@@ -35,7 +35,25 @@ export const login = createApi({
                 method:'POST',
                 body, // User enters the Password
             }),invalidatesTags:['User']
+        }),
+
+        sendPhoneNumber:builder.mutation({
+            query:(body)=>({
+                url:'/phoneNumber',
+                method:'POST',
+                body, // User enters the PhoneNumber
+            }),invalidatesTags:['User']
+        }),
+
+        verifyPhoneNumber:builder.mutation({
+            query:(body)=>({
+                url:'/phoneNumber/verify',
+                method:'POST',
+                body, // User enters the phoneNumber and OtP
+            }),invalidatesTags:['User']
         })
 
     }),
 })
+
+export const {useUserLoginMutation,useVerifyUserQuery,useSetPasswordMutation,useSendPhoneNumberMutation,useVerifyPhoneNumberMutation} = signUp;
