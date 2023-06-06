@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { posts } from "./slices/sspost";
-import { login } from './slices/login';
+import { posts } from "./api/sspost";
+import { login } from './api/login';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import userReducer from "./slices/userSlice";
 
-import { profile } from "./slices/profile"
+import { profile } from "./api/profile"
 
 
 export const store = configureStore({

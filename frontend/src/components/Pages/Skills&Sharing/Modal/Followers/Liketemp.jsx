@@ -1,5 +1,5 @@
 import React from 'react'
-import { useFetchUserInfoQuery } from '../../../../../redux/slices/sspost';
+import { useFetchUserInfoQuery } from '../../../../../redux/api/sspost';
 
 function Liketemp({ uid }) {
 

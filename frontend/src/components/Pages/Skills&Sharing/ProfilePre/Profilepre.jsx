@@ -1,5 +1,5 @@
 import React from 'react'
-import { useFetchUserInfoQuery } from '../../../../redux/slices/sspost';
+import { useFetchUserInfoQuery } from '../../../../redux/api/sspost';
 export default function Profilepre() {
 
   const { data, isLoading, isError } = useFetchUserInfoQuery("64356264fb99aceedccc28d2");

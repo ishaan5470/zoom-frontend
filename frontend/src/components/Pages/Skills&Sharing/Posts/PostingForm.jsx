@@ -1,7 +1,7 @@
 import React from 'react';
 import Posts from './Posts';
 import Combar from '../Modal/Comments/Combar';
-import { useFetchUserInfoQuery, useFetchPostsQuery } from '../../../../redux/slices/sspost';
+import { useFetchUserInfoQuery, useFetchPostsQuery } from '../../../../redux/api/sspost';
 
 export default function Post() {
 

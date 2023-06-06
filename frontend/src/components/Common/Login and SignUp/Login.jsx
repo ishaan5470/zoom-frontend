@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { RxCross1 } from "react-icons/rx";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useState } from "react";
 import GoogleIcon from '@mui/icons-material/Google';
-import { useUserLoginMutation } from "../../../redux/slices/login";
+import { useUserLoginMutation } from "../../../redux/api/login";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../../redux/slices/userSlice";
 
@@ -12,13 +12,18 @@ import { addUser } from "../../../redux/slices/userSlice";
 
 export default function Login() {
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [login, {data,isLoading,isSuccess}] = useUserLoginMutation();
   console.log(isLoading)
   console.log(data)
 
-  const dispatch = useDispatch();
-  
-  const navigate = useNavigate();
+  useEffect(()=>{
+    if(isSuccess){
+      dispatch(addUser({id:data.user._id,userName:data.user.userName}));
+      navigate("/user");
+    }
+  },[login,data])
   const initialInput = {
     userName: "",
     password: ""
@@ -38,10 +43,6 @@ export default function Login() {
     login(input);
     console.log(data);
     setInput(initialInput);
-    if(isSuccess){
-      dispatch(addUser({id:data.user._id,userName:data.user.userName}));
-      navigate("/user");
-    }
   }
 
 

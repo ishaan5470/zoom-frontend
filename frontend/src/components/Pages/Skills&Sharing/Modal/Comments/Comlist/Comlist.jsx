@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react'
 
-import { useFetchUserInfoQuery } from '../../../../../../redux/slices/sspost';
+import { useFetchUserInfoQuery } from '../../../../../../redux/api/sspost';
 
 function Comlist({ com }) {
 
