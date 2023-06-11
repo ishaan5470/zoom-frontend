@@ -4,6 +4,8 @@
   "description": "Backend For ZealYug Final",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ZealYug",
@@ -21,5 +23,8 @@
     "mongoose": "^7.2.2",
     "nodemailer": "^6.9.3",
     "otp-generator": "^4.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }
