@@ -5,6 +5,7 @@ const messageSchema = new Schema(
     message: {
       type: String,
     },
+    // [from, to] = [sender, receiver] ---> [_id sender, _id receiver]
     users: Array,
     sender: {
       type: String,
