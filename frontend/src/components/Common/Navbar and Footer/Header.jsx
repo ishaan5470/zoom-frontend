@@ -13,8 +13,8 @@ const Header = () => {
 
     return (
         <div>
-            <div className="flex justify-between items-center h-[80px] w-full text-black font-bold bg-[#f9f9f9] lg:px-20 px-5 overflow-x-clip">
-                <div><img src="images/LOGO.png" className="h-[60px]" alt="Logo" /></div>
+            <div className="flex justify-between items-center h-[80px] w-full text-black font-bold bg-[#f9f9f9] lg:px-20 px-5 overflow-x-clip mb-2">
+                <div><img src="/images/LOGO.png" className="h-[60px]" alt="Logo" /></div>
                 <div className="flex justify-center items-center ">
                     <div className="mr-5"><ul className="justify-center items-center hidden lg:flex">
                         <li className="p-4 hover:border-b-2 cursor-pointer border-black">Home</li>

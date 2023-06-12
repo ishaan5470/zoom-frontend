@@ -4,9 +4,9 @@ import { RxCross1 } from "react-icons/rx";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useState } from "react";
 import GoogleIcon from '@mui/icons-material/Google';
-import { useUserLoginMutation } from "../../../redux/api/login";
+import { useUserLoginMutation } from "../../../../redux/api/login";
 import { useDispatch } from "react-redux";
-import { addUser } from "../../../redux/slices/userSlice";
+import { addUser } from "../../../../redux/slices/userSlice";
 
 
 
@@ -15,21 +15,23 @@ export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [login, {data,isLoading,isSuccess}] = useUserLoginMutation();
+  const [passwordVisibilityFlag, setpasswordVisibilityFlag] = useState(false);
+  const initialInput = {
+    userName: "",
+    password: ""
+  }
+  const [input, setInput] = useState(initialInput);
   console.log(isLoading)
   console.log(data)
 
   useEffect(()=>{
     if(isSuccess){
       dispatch(addUser({id:data.user._id,userName:data.user.userName}));
+      console.log(data.token);
+      localStorage.setItem("token",data.token)
       navigate("/user");
     }
   },[login,data])
-  const initialInput = {
-    userName: "",
-    password: ""
-  }
-  const [passwordVisibilityFlag, setpasswordVisibilityFlag] = useState(false);
-  const [input, setInput] = useState(initialInput);
 
   const handleChange = (e) => {
     const nameOfInput = e.target.name;
@@ -55,15 +57,15 @@ export default function Login() {
 
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center object-cover overflow-x-clip overflow-y-scroll">
+    <div className="w-screen h-[calc(100vh-80px)] flex items-center justify-center object-cover overflow-clip overflow-y-scroll md:overflow-y-clip">
       {/* Background Image */}
       <img
         className="absolute left-0 top-0 w-full h-full -z-50 "
         src="images/backgroundImg.png"
         alt="background"
       />
-      <div className="flex flex-col justify-center mx-auto">
-        <div className="relative object-contain text-center">
+      <div className="flex flex-col md:justify-center mx-auto w-[800px]">
+        {/* <div className="relative object-contain text-center">
           <img
             className="mx-auto h-18"
             src="images/LOGO.png"
@@ -71,21 +73,21 @@ export default function Login() {
             width={180}
 
           />
-        </div>
+        </div> */}
         {/* Actual form */}
         <div className="rounded-2xl shadow-md shadow-gray-500 bg-gradient-to-t from-white to-[#dae3e6] relative">
-          <p className="text-2xl text-center my-4 px-10">Welcome Back Mate! Your Profile Is doing Great.</p>
+          <p className="text-xl md:text-2xl text-center md:my-4 px-10">Welcome Back Mate! Your Profile Is doing Great.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 m-auto h-fit sm:max-w-[900px] ">
             {/* Left side */}
             <div className="w-full  flex items-center justify-center rounded-2xl object-contain">
               <img
-                className="flex rounded-2xl h-[360px]"
+                className="flex rounded-2xl h-[100px] sm:h-[200px] md:h-[360px]"
                 src="images/loginImg.png"
                 alt="/"
               />
             </div>
             {/* Right side */}
-            <div className="p-2 flex flex-col gap-7 opacity-100 rounded-r-2xl mt-10">
+            <div className="md:p-2 flex flex-col gap-7 opacity-100 rounded-r-2xl mt-10">
               <form>
                 <Link to="../">
                   <RxCross1 className="absolute right-5 top-5" />
@@ -108,7 +110,7 @@ export default function Login() {
                   </button>
                 </div>
                 <div className="">
-                  <Link to="/Forget">
+                  <Link to="/forgotPassword">
                     <p className=" hover:cursor-pointer text-blue-600 text-sm hover:text-red-600 flex justify-center items-center">
                       Forgot password?
                     </p>
@@ -124,7 +126,7 @@ export default function Login() {
               </div>
               <div className="flex justify-center items-center gap-2 mb-4">
                 <p className="font-light">Don't have an Account?</p>
-                <Link to="/signUp">
+                <Link to="/registeration/phoneNumber">
                   <p className="text-blue-600 hover:text-red-600 ">Sign Up</p>
                 </Link>
               </div>

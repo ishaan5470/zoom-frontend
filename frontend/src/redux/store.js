@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { posts } from "./api/sspost";
 import { login } from './api/login';
+import { signUp } from './api/signup';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import userReducer from "./slices/userSlice";
 
@@ -12,6 +13,7 @@ export const store = configureStore({
         userReducer,
         [posts.reducerPath]: posts.reducer,
         [login.reducerPath]: login.reducer,
+        [signUp.reducerPath]:signUp.reducer,
         [profile.reducerPath]: profile.reducer,
     },
     middleware: (getDefaultMiddleware) =>
@@ -19,6 +21,7 @@ export const store = configureStore({
             .concat(posts.middleware)
             .concat(profile.middleware)
             .concat(login.middleware)
+            .concat(signUp.middleware)
 
 });
 
