@@ -1,21 +1,21 @@
-import React from "react";
-import Home from "./components/Pages/Skills&Sharing/Home";
-import Navbar from "./components/Common/Navbar and Footer/Navbar";
-import Header from "./components/Common/Navbar and Footer/Header"
-import { Route,Routes } from "react-router-dom";
-import Login from "./components/Common/Login and SignUp/Login";
-import UsersSignup from "./components/Common/Login and SignUp/UsersSignup";
+import React from 'react';
+import Home from './components/Pages/Skills&Sharing/Home';
+import Header from './components/Common/Navbar and Footer/Header';
+import { Route, Routes } from 'react-router-dom';
+import Login from './components/Common/Login and SignUp/Login';
+import UsersSignup from './components/Common/Login and SignUp/UsersSignup';
 
+import ChatPage from './pages/ChatPage/ChatPage';
 
-import VisitUserProfile from "./components/Pages/ProfilePage/UserProfilePage"
 function App() {
   return (
     <>
       <Header />
-     <Routes>
-      <Route path="/posts" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/registeration" element={<UsersSignup />} />
+      <Routes>
+        <Route path='/posts' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/registeration' element={<UsersSignup />} />
+        <Route path='/messaging' element={<ChatPage />} />
       </Routes>
       {/* <Home /> */}
       {/* <VisitUserProfile /> */}
