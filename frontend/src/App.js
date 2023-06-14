@@ -14,7 +14,7 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './components/Common/Login and SignUp/Login/Login';
 import UsersSignup from "./components/Common/Login and SignUp/SignUp/UsersSignup";
 
-import ChatPage from './pages/ChatPage/ChatPage';
+import ChatPage from './components/Pages/chats/Chat';
 import Contact from "./components/Pages/JobPosting/Contact";
 import Guidelines from "./components/Pages/JobPosting/Guidelines";
 import InstantJobDetails from "./components/Pages/JobPosting/InstantJobDetails";
