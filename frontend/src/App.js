@@ -13,7 +13,14 @@ import ForgotPasswordVerifyOTP from "./components/Common/Login and SignUp/Login/
 import ForgotPasswordSetPassword from "./components/Common/Login and SignUp/Login/SetPassword";
 
 
+import React from 'react';
+import Home from './components/Pages/Skills&Sharing/Home';
+import Header from './components/Common/Navbar and Footer/Header';
+import { Route, Routes } from 'react-router-dom';
+import Login from './components/Common/Login and SignUp/Login';
+import UsersSignup from './components/Common/Login and SignUp/UsersSignup';
 
+import ChatPage from './pages/ChatPage/ChatPage';
 
 import VisitUserProfile from "./components/Pages/ProfilePage/UserProfilePage"
 import VerifyOTP from "./components/Common/Login and SignUp/SignUp/VerifyOTP";
@@ -32,8 +39,7 @@ function App() {
       <Route path="/forgotPassword/email" element={<ForgotPasswordEmail />} />
       <Route path="/forgotPassword/verify" element={<ForgotPasswordVerifyOTP />} />
       <Route path="/forgotPassword/setPassword" element={<ForgotPasswordSetPassword />} />
-
-
+      <Route path='/messaging' element={<ChatPage />} />
       </Routes>
       {/* <Home /> */}
       {/* <VisitUserProfile /> */}
