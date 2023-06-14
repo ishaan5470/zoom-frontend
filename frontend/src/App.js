@@ -5,9 +5,15 @@ import Header from "./components/Common/Navbar and Footer/Header"
 import { Route,Routes } from "react-router-dom";
 import Login from "./components/Common/Login and SignUp/Login/Login";
 import UsersSignup from "./components/Common/Login and SignUp/SignUp/UsersSignup";
-import SetPassword from "./components/Common/Login and SignUp/SignUp/SetPassword";
+import SetCredentials from "./components/Common/Login and SignUp/SignUp/SetCredentials";
 import Forget from "./components/Common/Login and SignUp/Login/Forget";
 import ForgotPasswordPhoneNumber from "./components/Common/Login and SignUp/Login/ForgotPasswordPhoneNumber";
+import ForgotPasswordEmail from "./components/Common/Login and SignUp/Login/ForgotPasswordEmail";
+import ForgotPasswordVerifyOTP from "./components/Common/Login and SignUp/Login/ForgotPasswordVerifyOTP";
+import ForgotPasswordSetPassword from "./components/Common/Login and SignUp/Login/SetPassword";
+
+
+
 
 import VisitUserProfile from "./components/Pages/ProfilePage/UserProfilePage"
 import VerifyOTP from "./components/Common/Login and SignUp/SignUp/VerifyOTP";
@@ -20,9 +26,14 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/registeration/phoneNumber" element={<UsersSignup />} />
       <Route path="/registeration/phoneNumber/verify" element={<VerifyOTP />} />
-      <Route path="/setCredentials" element={<SetPassword />} />
+      <Route path="/setCredentials" element={<SetCredentials />} />
       <Route path="/forgotPassword" element={<Forget />} />
       <Route path="/forgotPassword/phoneNumber" element={<ForgotPasswordPhoneNumber />} />
+      <Route path="/forgotPassword/email" element={<ForgotPasswordEmail />} />
+      <Route path="/forgotPassword/verify" element={<ForgotPasswordVerifyOTP />} />
+      <Route path="/forgotPassword/setPassword" element={<ForgotPasswordSetPassword />} />
+
+
       </Routes>
       {/* <Home /> */}
       {/* <VisitUserProfile /> */}

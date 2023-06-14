@@ -6,12 +6,13 @@ const userSchema=new mongoose.Schema({
     },
     userName:{
         type:String,
+        unique:true
     },
     phoneNumber:{
-        type:String,
+        type:Number,
     },
     email:{
-        type:String
+        type:String,
     },
     password:{
         type:String,
@@ -19,17 +20,15 @@ const userSchema=new mongoose.Schema({
     Company:{
         type:Boolean,
         required:true,
-        default:false
+        default:false,
     },
     is_verified_email:{
         type:Boolean,
-        required:true,
-        default:false
+        default:false,
     },
     is_verified_phone:{
         type:Boolean,
-        required:true,
-        default:false
+        default:false,
     },
     phoneOtp:{
         type:String,

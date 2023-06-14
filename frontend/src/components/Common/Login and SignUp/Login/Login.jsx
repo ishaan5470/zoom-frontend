@@ -93,11 +93,11 @@ export default function Login() {
                   <RxCross1 className="absolute right-5 top-5" />
                 </Link>
                 <div className="flex flex-col font-jakarta text-center">
-                  <input placeholder="UserName/Email" className="p-2 pl-8 mx-4 rounded-xl outline-none w-[95%]" type="text" autoComplete="on" name="userName" value={input.userName} onChange={handleChange} />
+                  <input placeholder="UserName/Email" className="p-2 pl-8 mx-4 rounded-xl outline-none w-[95%]" type="text" autoComplete="on" name="userName" value={input.userName} onChange={handleChange} required={true} />
                 </div>
                 <div className="flex flex-col py-2">
                   <div className="flex-row items-center justify-center relative">
-                    <input autoComplete="on" className=" p-2 pl-8 mx-4 rounded-xl outline-none w-[95%]" type={passwordVisibilityFlag ? "text" : "password"} placeholder="Password" name="password" value={input.password} onChange={handleChange} />
+                    <input autoComplete="on" className=" p-2 pl-8 mx-4 rounded-xl outline-none w-[95%]" type={passwordVisibilityFlag ? "text" : "password"} placeholder="Password" name="password" value={input.password} onChange={handleChange} required={true} />
                     <button className="cursor-pointer absolute right-[30px] top-2 bg-white border-none active:border-none focus:border-none h-4" onClick={handlePasswordVisibility}><VisibilityIcon className="" /></button>
                   </div>
                   <p className="flex items-center justify-center mt-2">
@@ -117,6 +117,7 @@ export default function Login() {
                   </Link>
                 </div>
               </form>
+              {isLoading?<p>Loading...</p>:null}
               <div className="flex justify-center items-center mt-0">
                 <hr className="w-[120px]" /><p className="mx-2">OR</p><hr className="w-[120px]" /></div>
               <div className="flex justify-center items-center gap-10">

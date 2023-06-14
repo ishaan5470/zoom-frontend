@@ -6,13 +6,13 @@ import { useForgotPasswordPhoneNumberMutation } from "../../../../redux/api/logi
 
 const UsersSignup = () => {
   const [phoneNumber,setPhoneNumber] = useState(0);
-  const [forgotPasswordPhoneNumber,{isSuccess,isError,error}] = useForgotPasswordPhoneNumberMutation()
+  const [forgotPasswordPhoneNumber,{isLoading,isSuccess,isError,error}] = useForgotPasswordPhoneNumberMutation()
   
   const navigate = useNavigate();
 
   useEffect(()=>{
     if(isSuccess){
-      navigate("/forgotPassword/phoneNumber/verify",{state:{phoneNumber}});
+      navigate("/forgotPassword/verify",{state:{phoneNumber}});
     }
     else if(isError){
       console.log(error);
@@ -27,6 +27,7 @@ const UsersSignup = () => {
 
   function handleSendOtp(e){
     e.preventDefault();
+    console.log(phoneNumber);
     forgotPasswordPhoneNumber({phoneNumber});
   }
 
@@ -65,7 +66,8 @@ const UsersSignup = () => {
                       Send OTP
                     </button>
                 </div>
-              </form>  
+              </form> 
+              {isLoading?<p>Loading...</p>:null} 
               <div className="flex justify-between items-center gap-5 w-full">
                 <p className="">Already have an Account?</p>
                 <Link to="/login">

@@ -1,33 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
-import { useSendPhoneNumberMutation } from "../../../../redux/api/signup";
+import { useForgotPasswordEmailMutation } from "../../../../redux/api/login";
 
 
 const UsersSignup = () => {
-  const [phoneNumber,setPhoneNumber] = useState(0);
-  const [signUpPhoneNumber,{data,isLoading,isSuccess,isError,error}] = useSendPhoneNumberMutation();
+  const [Email,setEmail] = useState("");
+  const [forgotPasswordEmail,{isLoading,isSuccess,isError,error}] = useForgotPasswordEmailMutation();
   
   const navigate = useNavigate();
 
   useEffect(()=>{
     if(isSuccess){
-      navigate("/registeration/phoneNumber/verify",{state:{phoneNumber}});
+      navigate("/forgotPassword/verify",{state:{email:Email}});
     }
     else if(isError){
       console.log(error);
       console.log("re-enter PhoneNumber");
-      setPhoneNumber(0);
+      setEmail("");
     }
-  },[data])
+  },[isSuccess,isError,error,Email,navigate])
 
-  function handleNumberChange(e){
-      setPhoneNumber(e.target.value);
+  function handleMailChange(e){
+      setEmail(e.target.value);
   }
 
   function handleSendOtp(e){
     e.preventDefault();
-    signUpPhoneNumber({phoneNumber:phoneNumber});
+    console.log(Email);
+    forgotPasswordEmail({email:Email});
   }
 
   
@@ -40,14 +41,6 @@ const UsersSignup = () => {
         src="../images/backgroundImg.png"
         alt="background"
       />
-        {/* <div>
-        <img
-          className=""
-          src="../images/LOGO.png"
-          alt="/"
-          width={180}
-        />
-        </div> */}
         {/* Actual form */}
         <div className=" flex flex-col items-center justify-center rounded-xl bg-gradient-to-t from-white to-[#dae3e6] w-[800px] p-10 relative md:h-[500px] box-border">
           <div className="mb-4 font-bold text-center  py-4 rounded-xl tracking-wider text-xl"><p>We are Excited to have You Mate!!!</p></div>
@@ -58,13 +51,12 @@ const UsersSignup = () => {
             <div className="p-4 flex flex-col justify-around rounded-l-2xl text-center md:w-1/2">
               <form className="">
                 <div className="flex flex-col md:py-2 text-center pt-8 ">
-                  <label className="p-4">Enter Phone Number</label>
+                  <label className="p-4">Enter Your Email</label>
                   <input
                     className="border p-1 mx-4 text-center rounded-md"
                     type="tel"
-                    value={phoneNumber}
-                    onChange={handleNumberChange}
-                    required={true}
+                    value={Email}
+                    onChange={handleMailChange}
                   />
                 </div>
                 {/* for captcha */}
@@ -74,9 +66,8 @@ const UsersSignup = () => {
                       Send OTP
                     </button>
                 </div>
-              </form>
-              {isLoading?<p>Loading...</p>:null}
-              {isError && <span className="text-red-700">User is Already registered</span>}    
+              </form>  
+              {isLoading?<p>Loading....</p>:null}
               <div className="flex justify-between items-center gap-5 w-full">
                 <p className="">Already have an Account?</p>
                 <Link to="/login">
@@ -94,7 +85,7 @@ const UsersSignup = () => {
                 src="../images/loginImg.png"
                 alt="/"
               />
-              <Link to="../">
+              <Link to="/forgotPassword">
                 <img src="../images/close.png" alt="close" className="absolute right-5 top-5 h-3" />
               </Link>
             </div>

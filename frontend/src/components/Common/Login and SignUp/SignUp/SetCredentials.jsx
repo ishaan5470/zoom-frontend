@@ -3,19 +3,18 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { RxCross1 } from "react-icons/rx"
 import { useDeleteIncompleteSignupMutation, useSetCredentialsMutation } from "../../../../redux/api/signup";
 
 
 
 // post the phone number to backend
-const SetPassword = () => {
+const SetCredentials = () => {
   const [password, setPassword] = useState([])
   const [reEnterPassword, setReEnterPassword] = useState([])
   const [passwordVisibilityFlag, setpasswordVisibilityFlag] = useState(false);
   const [userName,setUserName] = useState([]);
   const [name,setName] = useState([]);
-  const [setCredentialshook,{data,isError,error,isSuccess}]= useSetCredentialsMutation();
+  const [setCredentialshook,{data,isLoading,isError,error,isSuccess}]= useSetCredentialsMutation();
   const navigate = useNavigate();
   const [handleIncompleteSignup] = useDeleteIncompleteSignupMutation();
   const {state} = useLocation();
@@ -83,6 +82,7 @@ const SetPassword = () => {
                     value={name}
                     onChange={(e)=>{setName(e.target.value)}}
                     placeholder="Enter Your Name"
+                    required={true}
                   />
                 </div>
 
@@ -96,6 +96,7 @@ const SetPassword = () => {
                     value={userName}
                     onChange={(e)=>{setUserName(e.target.value)}}
                     placeholder="Enter Your UserName"
+                    required={true}
                   />
                 </div>
 
@@ -108,6 +109,7 @@ const SetPassword = () => {
                     value={password}
                     onChange={(e)=>{setPassword(e.target.value)}}
                     placeholder="************"
+                    required={true}
                   />
                 </div>
                 <div className="flex flex-col text-left relative">
@@ -119,6 +121,7 @@ const SetPassword = () => {
                     value={reEnterPassword}
                     onChange={(e)=>{setReEnterPassword(e.target.value)}}
                     placeholder="************"
+                    required={true}
                   />
                   <button className="cursor-pointer absolute right-[30px] top-8 bg-white border-none active:border-none focus:border-none h-4" onClick={handlePasswordVisibility}><VisibilityIcon className="" /></button>
                 </div>
@@ -130,6 +133,7 @@ const SetPassword = () => {
                     </button>
                 </div>
               </form>
+              {isLoading?<p>Loading...</p>:null}
               {isError && <span>Oops something went wrong</span>}
               {/* already have a  account  */}
               <div className="flex justify-center items-center">
@@ -156,4 +160,4 @@ const SetPassword = () => {
   )
 }
 
-export default SetPassword
+export default SetCredentials

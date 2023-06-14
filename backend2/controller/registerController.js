@@ -56,7 +56,7 @@ const registerUser = async (req, res) => {
             console.log(user._id);
             let token = jwt.sign({ name: user.name }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
             console.log(token);
-            res.cookie({ token });
+            es.cookie(`token`,`${token}`,{httpOnly:true,secure:true});
             res.send({ id: user._id, token, message: "A Link to Your Email has been sent. Verify Your Email" });
         } catch (error) {
             console.log(error.message);
