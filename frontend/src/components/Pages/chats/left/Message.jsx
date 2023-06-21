@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Box,
   Avatar,
@@ -8,14 +8,14 @@ import {
   MenuItem,
   ListItemIcon,
   ListItemText,
-} from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+} from "@mui/material";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-import ArchiveIcon from '@mui/icons-material/Archive';
-import VolumeOffIcon from '@mui/icons-material/VolumeOff';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ClearIcon from '@mui/icons-material/Clear';
-import MarkAsUnreadIcon from '@mui/icons-material/MarkAsUnread';
+import ArchiveIcon from "@mui/icons-material/Archive";
+import VolumeOffIcon from "@mui/icons-material/VolumeOff";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ClearIcon from "@mui/icons-material/Clear";
+import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
 
 const Message = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -32,39 +32,39 @@ const Message = () => {
   return (
     <Box
       sx={{
-        display: 'flex',
-        justifyContent: 'justify-between',
-        gap: '16px',
-        alignItems: 'center',
+        display: "flex",
+        justifyContent: "justify-between",
+        gap: "16px",
+        alignItems: "center",
         padding: 0,
-        mb: 1,
+        mb: 0.4,
         p: 1,
-        '&:hover': {
-          border: '1px solid #ccc',
-          '& .addIcon': {
-            display: 'flex',
+        "&:hover": {
+          border: "1px solid #ccc",
+          "& .addIcon": {
+            display: "flex",
           },
         },
       }}
     >
       <Avatar
-        alt='Remy Sharp'
-        src='https://mui.com/static/images/avatar/2.jpg'
+        alt="Remy Sharp"
+        src="https://mui.com/static/images/avatar/2.jpg"
       />
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Typography variant='body1'>Subodh</Typography>
-        <Typography variant='caption'>Bhai kya kar rha hai tu ? </Typography>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Typography variant="body1">Subodh</Typography>
+        <Typography variant="caption">Bhai kya kar rha hai tu ? </Typography>
       </Box>
-      <Typography variant='overline'>
-        {new Date().toLocaleString('en-IN').split(' ')[1]}
+      <Typography variant="overline" sx={{ marginTop: "-16px" }}>
+        {new Date().toLocaleString("en-IN").split(" ")[1]}
       </Typography>
 
       <IconButton
         onClick={handleClick}
-        className='addIcon'
-        sx={{ display: 'none' }}
+        className="addIcon"
+        sx={{ display: "none" }}
       >
-        <MoreVertIcon />
+        <MoreVertIcon/>
       </IconButton>
 
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>

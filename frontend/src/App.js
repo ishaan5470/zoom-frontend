@@ -28,10 +28,13 @@ import VisitUserProfile from "./components/Pages/ProfilePage/UserProfilePage"
 import VerifyOTP from "./components/Common/Login and SignUp/SignUp/VerifyOTP";
 import Notification from "./components/Pages/Notification/Notification";
 
+import Footer from "./components/Common/Navbar and Footer/Footer";
+
 function App() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
+      <Navbar/> 
      {/* <Routes>
       <Route path="/posts" element={<Home />} />
       <Route path="/login" element={<Login />} />
@@ -54,9 +57,9 @@ function App() {
       {/* <InternshipDetails /> */}
       {/* <JobDetails /> */}
       {/* <JobPosting /> */}
-      <ShadowingDetails />
-      {/* <ChatPage /> */}
-
+      {/* <ShadowingDetails /> */}
+      <ChatPage />
+    {/* <Footer/>  */}
     </>
   );
 }

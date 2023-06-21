@@ -1,4 +1,4 @@
-const Message = require('../model/message');
+const Message = require('../model/Message');
 
 /* @desc    Add a message
  * @route   POST /messages/add
