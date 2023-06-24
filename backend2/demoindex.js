@@ -7,13 +7,11 @@ const bodyparser = require("body-parser");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const http = require("http");
+const chat = require("./config/chat_sockets");
+
+// setting up socket.io
 const server = http.createServer();
-
-const chatSockets = require("./config/chat_sockets");
-chatSockets(server);
-
-const notificationSockets = require("./config/notification_sockets");
-notificationSockets(server);
+chat(server);
 
 //Routes
 const loginRoutes = require("./routes/loginRoutes");
@@ -66,5 +64,12 @@ app.use("/login", loginRoutes);
 
 app.use("/conversations", conversationRoutes);
 app.use("/messages", messageRoutes);
+
+/*=======================
+Setting sockets connection
+=========================*/
+
+
+
 
 app.listen(8000, () => console.log("app is running on port 8000"));
