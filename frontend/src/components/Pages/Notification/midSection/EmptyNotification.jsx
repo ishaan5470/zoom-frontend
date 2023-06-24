@@ -1,4 +1,4 @@
-function EmptyNotification() {
+function EmptyNotification({message}) {
   return (
     <>
       <img
