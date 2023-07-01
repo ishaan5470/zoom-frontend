@@ -11,7 +11,6 @@ import { addUser } from "../../../../redux/slices/userSlice";
 
 
 export default function Login() {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [login, {data,isLoading,isSuccess}] = useUserLoginMutation();
@@ -53,7 +52,10 @@ export default function Login() {
     setpasswordVisibilityFlag(!passwordVisibilityFlag);
   }
 
-
+// GOOGLE LOGIN
+const google = () => {
+  window.open("http://localhost:8000/auth/google", "_self");
+};
 
 
   return (
@@ -121,7 +123,7 @@ export default function Login() {
               <div className="flex justify-center items-center mt-0">
                 <hr className="w-[120px]" /><p className="mx-2">OR</p><hr className="w-[120px]" /></div>
               <div className="flex justify-center items-center gap-10">
-                <GoogleIcon className="cursor-pointer" />
+                <GoogleIcon className="cursor-pointer" style={{color:"red"}} onClick={google}/>
                 <GoogleIcon className="cursor-pointer" />
                 <GoogleIcon className="cursor-pointer" />
               </div>

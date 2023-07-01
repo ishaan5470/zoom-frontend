@@ -6,6 +6,10 @@ const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const passport = require("passport");
+const passportConfig = require("./config/passport");
+
 const http = require("http");
 const server = http.createServer();
 
@@ -21,6 +25,7 @@ const registerRoutes = require("./routes/registerRoute");
 //const chatRoutes = require('./routes/chatRoutes');
 const conversationRoutes = require("./routes/conversationRoutes");
 const messageRoutes = require("./routes/messageRoutes");
+const authRoute = require("./routes/passportGoogleAuth");
 
 dotenv.config();
 
@@ -29,6 +34,21 @@ app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 app.use(cookieParser());
+
+app.use(
+  session({
+    secret: "somethingsecretgoeshere",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 15 * 60 * 1000, // in milliseconds
+    },
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(
   cors({
     origin: ["http://localhost:3000"],
@@ -60,6 +80,7 @@ db.once("open", function () {
   console.log("Successfully connected to the database");
 });
 
+app.use("/auth", authRoute);
 app.use("/registeration", registerRoutes);
 app.use("/login", loginRoutes);
 //app.use('/messages', chatRoutes);

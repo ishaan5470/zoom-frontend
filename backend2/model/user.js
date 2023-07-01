@@ -32,6 +32,9 @@ const userSchema=new mongoose.Schema({
     },
     phoneOtp:{
         type:String,
+    },
+    profilePic:{
+        type:String,
     }
 })
 
