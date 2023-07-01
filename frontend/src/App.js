@@ -65,7 +65,7 @@ function App() {
 
   const fetchUser = async () => {
     try {
-      const response = await fetch("http://localhost:8000/auth/login/success", {
+      const response = await fetch("http://localhost:8000/auth/login", {
         method: "GET",
         credentials: "include",
         headers: {

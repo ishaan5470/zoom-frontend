@@ -25,7 +25,7 @@ const registerRoutes = require("./routes/registerRoute");
 //const chatRoutes = require('./routes/chatRoutes');
 const conversationRoutes = require("./routes/conversationRoutes");
 const messageRoutes = require("./routes/messageRoutes");
-const authRoute = require("./routes/passportGoogleAuth");
+const authRoute = require("./routes/passport_Google_Microsoft_Auth");
 
 dotenv.config();
 
@@ -87,5 +87,18 @@ app.use("/login", loginRoutes);
 
 app.use("/conversations", conversationRoutes);
 app.use("/messages", messageRoutes);
+
+/*====================================
+  ROUTE TO DELETE A USER by ID
+======================================
+/*const User = require("./model/user");
+app.delete("/users/delete/:id", async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    return res.status(200).json("User deleted");
+  } catch (error) {
+    return res.status(401).json("could not delete");
+  }
+});*/
 
 app.listen(8000, () => console.log("app is running on port 8000"));

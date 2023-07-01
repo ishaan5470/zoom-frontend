@@ -1,42 +1,40 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { RxCross1 } from "react-icons/rx";
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useState } from "react";
-import GoogleIcon from '@mui/icons-material/Google';
+import GoogleIcon from "@mui/icons-material/Google";
+import WindowIcon from '@mui/icons-material/Window';
 import { useUserLoginMutation } from "../../../../redux/api/login";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../../../redux/slices/userSlice";
 
-
-
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [login, {data,isLoading,isSuccess}] = useUserLoginMutation();
+  const [login, { data, isLoading, isSuccess }] = useUserLoginMutation();
   const [passwordVisibilityFlag, setpasswordVisibilityFlag] = useState(false);
   const initialInput = {
     userName: "",
-    password: ""
-  }
+    password: "",
+  };
   const [input, setInput] = useState(initialInput);
-  console.log(isLoading)
-  console.log(data)
+  console.log(isLoading);
+  console.log(data);
 
-  useEffect(()=>{
-    if(isSuccess){
-      dispatch(addUser({id:data.user._id,userName:data.user.userName}));
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(addUser({ id: data.user._id, userName: data.user.userName }));
       console.log(data.token);
-      localStorage.setItem("token",data.token)
+      localStorage.setItem("token", data.token);
       navigate("/user");
     }
-  },[login,data])
+  }, [login, data]);
 
   const handleChange = (e) => {
     const nameOfInput = e.target.name;
-    setInput({ ...input, [nameOfInput]: e.target.value })
-  }
-
+    setInput({ ...input, [nameOfInput]: e.target.value });
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -46,17 +44,20 @@ export default function Login() {
     setInput(initialInput);
   }
 
-
   function handlePasswordVisibility(e) {
     e.preventDefault();
     setpasswordVisibilityFlag(!passwordVisibilityFlag);
   }
 
-// GOOGLE LOGIN
-const google = () => {
-  window.open("http://localhost:8000/auth/google", "_self");
-};
+  // GOOGLE LOGIN
+  const google = () => {
+    window.open("http://localhost:8000/auth/google", "_self");
+  };
 
+  //MICROSOFT LOGIN
+  const microsoft = () => {
+    window.open("http://localhost:8000/auth/microsoft", "_self");
+  };
 
   return (
     <div className="w-screen h-[calc(100vh-80px)] flex items-center justify-center object-cover overflow-clip overflow-y-scroll md:overflow-y-clip">
@@ -78,7 +79,9 @@ const google = () => {
         </div> */}
         {/* Actual form */}
         <div className="rounded-2xl shadow-md shadow-gray-500 bg-gradient-to-t from-white to-[#dae3e6] relative">
-          <p className="text-xl md:text-2xl text-center md:my-4 px-10">Welcome Back Mate! Your Profile Is doing Great.</p>
+          <p className="text-xl md:text-2xl text-center md:my-4 px-10">
+            Welcome Back Mate! Your Profile Is doing Great.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 m-auto h-fit sm:max-w-[900px] ">
             {/* Left side */}
             <div className="w-full  flex items-center justify-center rounded-2xl object-contain">
@@ -95,19 +98,47 @@ const google = () => {
                   <RxCross1 className="absolute right-5 top-5" />
                 </Link>
                 <div className="flex flex-col font-jakarta text-center">
-                  <input placeholder="UserName/Email" className="p-2 pl-8 mx-4 rounded-xl outline-none w-[95%]" type="text" autoComplete="on" name="userName" value={input.userName} onChange={handleChange} required={true} />
+                  <input
+                    placeholder="UserName/Email"
+                    className="p-2 pl-8 mx-4 rounded-xl outline-none w-[95%]"
+                    type="text"
+                    autoComplete="on"
+                    name="userName"
+                    value={input.userName}
+                    onChange={handleChange}
+                    required={true}
+                  />
                 </div>
                 <div className="flex flex-col py-2">
                   <div className="flex-row items-center justify-center relative">
-                    <input autoComplete="on" className=" p-2 pl-8 mx-4 rounded-xl outline-none w-[95%]" type={passwordVisibilityFlag ? "text" : "password"} placeholder="Password" name="password" value={input.password} onChange={handleChange} required={true} />
-                    <button className="cursor-pointer absolute right-[30px] top-2 bg-white border-none active:border-none focus:border-none h-4" onClick={handlePasswordVisibility}><VisibilityIcon className="" /></button>
+                    <input
+                      autoComplete="on"
+                      className=" p-2 pl-8 mx-4 rounded-xl outline-none w-[95%]"
+                      type={passwordVisibilityFlag ? "text" : "password"}
+                      placeholder="Password"
+                      name="password"
+                      value={input.password}
+                      onChange={handleChange}
+                      required={true}
+                    />
+                    <button
+                      className="cursor-pointer absolute right-[30px] top-2 bg-white border-none active:border-none focus:border-none h-4"
+                      onClick={handlePasswordVisibility}
+                    >
+                      <VisibilityIcon className="" />
+                    </button>
                   </div>
                   <p className="flex items-center justify-center mt-2">
-                    <input className="mr-2 cursor-pointer" type="checkbox" /> Remember Me
+                    <input className="mr-2 cursor-pointer" type="checkbox" />{" "}
+                    Remember Me
                   </p>
                 </div>
                 <div className="flex justify-center">
-                  <button className=" cursor-pointer border w-1/3  my-3 py-2 rounded-3xl bg-gradient-to-br from-[#003d4d] to-[#57a7b3] hover:opacity-80 text-white " onClick={handleSubmit} type="submit">
+                  <button
+                    className=" cursor-pointer border w-1/3  my-3 py-2 rounded-3xl bg-gradient-to-br from-[#003d4d] to-[#57a7b3] hover:opacity-80 text-white "
+                    onClick={handleSubmit}
+                    type="submit"
+                  >
                     Sign In
                   </button>
                 </div>
@@ -119,12 +150,19 @@ const google = () => {
                   </Link>
                 </div>
               </form>
-              {isLoading?<p>Loading...</p>:null}
+              {isLoading ? <p>Loading...</p> : null}
               <div className="flex justify-center items-center mt-0">
-                <hr className="w-[120px]" /><p className="mx-2">OR</p><hr className="w-[120px]" /></div>
+                <hr className="w-[120px]" />
+                <p className="mx-2">OR</p>
+                <hr className="w-[120px]" />
+              </div>
               <div className="flex justify-center items-center gap-10">
-                <GoogleIcon className="cursor-pointer" style={{color:"red"}} onClick={google}/>
-                <GoogleIcon className="cursor-pointer" />
+                <GoogleIcon
+                  className="cursor-pointer"
+                  style={{ color: "red" }}
+                  onClick={google}
+                />
+                <WindowIcon className="cursor-pointer" style={{color:"#00a1f1",height:"29px",width:"29px"}} onClick={microsoft}/>
                 <GoogleIcon className="cursor-pointer" />
               </div>
               <div className="flex justify-center items-center gap-2 mb-4">
