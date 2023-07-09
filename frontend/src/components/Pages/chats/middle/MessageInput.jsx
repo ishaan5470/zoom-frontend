@@ -9,7 +9,7 @@ import AttachOptions from './AttachOptions';
 const MessageInput = () => {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '12px' }}>
-      <AttachOptions/>
+      <AttachOptions />
       <TextField
         sx={{ borderRadius: '5px' }}
         fullWidth
@@ -18,18 +18,18 @@ const MessageInput = () => {
         InputProps={{
           startAdornment: (
             <InputAdornment position='start'>
-              <MoodIcon style={{color:"#5D7D87"}}/>
+              <MoodIcon />
             </InputAdornment>
           ),
           endAdornment: (
             <InputAdornment position='end'>
-              <KeyboardVoiceIcon style={{color:"#5D7D87"}}/>
+              <KeyboardVoiceIcon />
             </InputAdornment>
           ),
         }}
       ></TextField>
-      <IconButton >
-        <SendIcon style={{color:"#5D7D87"}}/>
+      <IconButton sx={{ backgroundColor: 'white' }}>
+        <SendIcon />
       </IconButton>
     </Box>
   );

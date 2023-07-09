@@ -2,7 +2,15 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const login = createApi({
     reducerPath: 'login',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/login' ,credentials:"include"}),
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/login' ,credentials:"include",
+    prepareHeaders:(headers)=>{
+        let token = localStorage.getItem("token");
+        if(token){
+            headers.set('authorization', token)
+        }
+        return headers;
+    },
+}),
 
     tagTypes: ['User'],
     endpoints: (builder) => ({
@@ -42,10 +50,23 @@ export const login = createApi({
                 body //user will enter the Otp and email/phoneNumber
             }),
         }),
+        protected:builder.query({
+            query: () => ({
+                url: '/protected',
+                method: 'GET',//headers will be sent
+            }),
+        }),
+
+        protectedUser:builder.query({
+            query: () => ({
+                url: '/protected/user',
+                method: 'GET' //Dummy
+            }),
+        })
 
     }),
 })
 
 
 
-export const { useUserLoginMutation,useForgotPasswordPhoneNumberMutation,useForgotPasswordEmailMutation,useForgotPasswordVerifyOtpMutation,useForgotPasswordSetPasswordMutation } = login;
+export const { useUserLoginMutation,useForgotPasswordPhoneNumberMutation,useForgotPasswordEmailMutation,useForgotPasswordVerifyOtpMutation,useForgotPasswordSetPasswordMutation,useProtectedQuery,useProtectedUserQuery } = login;

@@ -1,13 +1,13 @@
-import { useState } from "react";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import { useState } from 'react';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
-import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
-import ArchiveIcon from "@mui/icons-material/Archive";
-import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-import SettingsIcon from "@mui/icons-material/Settings";
-import { ListItemIcon, ListItemText } from "@mui/material";
+import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import RsvpIcon from '@mui/icons-material/Rsvp';
+import SettingsIcon from '@mui/icons-material/Settings';
+import { ListItemIcon, ListItemText } from '@mui/material';
 
 const SearchMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -25,25 +25,25 @@ const SearchMenu = () => {
   return (
     <div>
       <IconButton onClick={handleClick}>
-        <ExpandCircleDownIcon style={{ color: "#5D7D87" }} />
+        <ExpandCircleDownIcon />
       </IconButton>
       <Menu
-        id="basic-menu"
+        id='basic-menu'
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
-            <PersonAddAlt1Icon />
-          </ListItemIcon>
-          <ListItemText>Invite</ListItemText>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
             <ArchiveIcon />
           </ListItemIcon>
           <ListItemText>Archive</ListItemText>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <RsvpIcon />
+          </ListItemIcon>
+          <ListItemText>Invite</ListItemText>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>

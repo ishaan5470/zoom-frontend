@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Box, Menu, MenuItem, IconButton } from "@mui/material";
+import { useState } from 'react';
+import { Box, Menu, MenuItem, IconButton } from '@mui/material';
 
-import ReportIcon from "@mui/icons-material/Report";
-import VideoCallOutlinedIcon from "@mui/icons-material/VideoCallOutlined";
+import InfoIcon from '@mui/icons-material/Info';
+import MissedVideoCallIcon from '@mui/icons-material/MissedVideoCall';
 
 const HeaderOptions = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -20,22 +20,20 @@ const HeaderOptions = () => {
   return (
     <Box>
       <IconButton>
-        <VideoCallOutlinedIcon style={{ color: "#5D7D87", fontSize: "30px" }} />
+        <MissedVideoCallIcon />
       </IconButton>
       <IconButton onClick={handleClick}>
-        <ReportIcon style={{ color: "#5D7D87" }} />
+        <InfoIcon />
       </IconButton>
 
       <Menu
-        id="basic-menu"
+        id='basic-menu'
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>Report</MenuItem>
-        <MenuItem onClick={handleClose} sx={{ color: "red" }}>
-          Block
-        </MenuItem>
+        <MenuItem onClick={handleClose}>Block</MenuItem>
       </Menu>
     </Box>
   );

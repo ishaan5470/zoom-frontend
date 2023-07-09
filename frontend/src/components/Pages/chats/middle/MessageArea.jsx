@@ -1,5 +1,5 @@
-import { Box } from "@mui/material";
-import MessageBox from "./MessageBox";
+import { Box } from '@mui/material';
+import MessageBox from './MessageBox';
 
 const MessageArea = () => {
   // 0 - reciever, 1 - sender
@@ -8,32 +8,22 @@ const MessageArea = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "white",
+        backgroundColor: 'white',
         p: 2,
-        height: "335px",
-        overflowY: "hidden",
-        "&:hover": {
-          overflowY: "scroll",
+        height: '335px',
+        overflowY: 'hidden',
+        '&:hover': {
+          overflowY: 'scroll',
         },
-        "&::-webkit-scrollbar": {
-          width: "2px",
-        },
-        "&::-webkit-scrollbar-track": {
-          backgroundColor: "white",
-        },
-        "&::-webkit-scrollbar-thumb": {
-          backgroundColor: "grey",
-        },
-        boxShadow: "rgba(0, 0, 0, 0.06) 1px 2px 4px 1px inset;",
       }}
     >
       {dummyMessages.map((self, index) => (
         <Box
           key={index}
           sx={{
-            display: "flex",
-            justifyContent: `${self ? "flex-end" : "flex-start"}`,
-            mb: 1, // mb:2 (initially)
+            display: 'flex',
+            justifyContent: `${self ? 'flex-end' : 'flex-start'}`,
+            mb: 2,
           }}
         >
           <MessageBox />

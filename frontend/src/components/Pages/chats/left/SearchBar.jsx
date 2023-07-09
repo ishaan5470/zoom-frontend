@@ -9,7 +9,7 @@ const SearchBar = () => {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        gap: '40px',
+        gap: '10px',
       }}
     >
       <TextField
@@ -18,7 +18,7 @@ const SearchBar = () => {
           endAdornment: (
             <InputAdornment>
               <IconButton>
-                <SearchIcon style={{color:"#5D7D87"}}/>
+                <SearchIcon />
               </IconButton>
             </InputAdornment>
           ),

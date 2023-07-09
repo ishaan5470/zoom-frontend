@@ -8,7 +8,7 @@ const Profile = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: '2px',
+        gap: '5px',
       }}
     >
       <Avatar
