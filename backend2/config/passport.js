@@ -1,6 +1,6 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const MicrosoftStrategy = require('passport-microsoft').Strategy;
+const MicrosoftStrategy = require("passport-microsoft").Strategy;
 
 // user model
 const User = require("../model/user");
@@ -38,15 +38,15 @@ passport.use(
 passport.use(
   new MicrosoftStrategy(
     {
-      clientID: "f8363733-11c0-400f-a6e1-b20018b19ecf",
-      clientSecret: "KV58Q~sYmODRMsixygr9huMInE6UxIrqpK3OAbzO",
-      callbackURL: "/auth/microsoft/callback", // The URL to redirect to after authentication
+      clientID: "195841aa-6da6-4294-a372-41488be9fad6",
+      clientSecret: "d.D8Q~beXMAANyyfngEFYnWL7iv6dMqDxMgxGczX",
+      callbackURL: "http://localhost:8000/auth/microsoft/callback", // The URL to redirect to after authentication
       scope: ["user.read"], // The scopes you want to request
     },
     async (accessToken, refreshToken, profile, done) => {
       //try {
       console.log("profile :- ", profile);
-      dont(null,profile);
+      dont(null, profile);
       //let user = await User.findOne({ email: profile.emails[0].value });
 
       //if (user) {

@@ -42,6 +42,7 @@ router.get(
 router.get(
   "/microsoft",
   passport.authenticate("microsoft", {
+    session:false,
     scope: ['openid', 'profile', 'email'],
     prompt: "select_account",
   })

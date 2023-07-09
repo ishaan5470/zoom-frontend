@@ -29,7 +29,7 @@ export default function Post() {
     <div className='h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden'>
 
       <div className='bg-[#ffffff] mx-3 my-6 rounded-xl p-5  m-w-[1000px] border-none shadow shadow-gray-500  '>
-        <h1 className='text-xl'>Good Morning ,  {user.data.firstName} </h1>
+        <h1 className='text-xl'>Good Morning ,  {user.data?.firstName} </h1>
         <p className='text-sm'>Time to Share What U Have Got </p>
 
 
@@ -38,8 +38,8 @@ export default function Post() {
       <div className='bg-[#fff] mx-3 my-3 rounded-xl pt-2 pb-2 px-5 z-50 max-w-[700px] border-none shadow shadow-gray-500'>
         {data1.data.data.map((post) => (
           <React.Fragment key={post._id}>
-            <Posts post={post} pid={post._id} uid={user.data.userid} />
-            <Combar pid={post._id} uid={user.data.userid} />
+            <Posts post={post} pid={post._id} uid={user.data?.userid} />
+            <Combar pid={post._id} uid={user.data?.userid} />
           </React.Fragment>
         ))}
       </div>

@@ -30,7 +30,7 @@ export default function Profilepre() {
         <div className=''>
 
           <div className=' w-[110px] h-[110px] mx-1 object-cover bg-transparent rounded-[100px]'><img src='/Images/profilePic.png' className='rounded-[150px] w-full h-full object-cover' alt='Pfimg' /></div>
-          <h1 className='mt-2 text-lg '>{user.data.firstName + " " + user.data.lastName}</h1>
+          <h1 className='mt-2 text-lg '>{user.data?.firstName + " " + user.data?.lastName}</h1>
 
         </div>
         <div className='w-[90px] h-[90px] bg-white mr-4 mt-1'>

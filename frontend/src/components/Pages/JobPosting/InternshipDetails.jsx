@@ -1,15 +1,6 @@
 import React from "react";
-import { useState } from "react";
-
 
 export default function InternshipDetails() {
-
-  // checkbox input handlers
-  const [selectedOption, setSelectedOption] = useState("");
-  const handleCheckboxChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
-
   return (
     <>
       {/* Internship Details */}
@@ -19,7 +10,7 @@ export default function InternshipDetails() {
             Internship Details
           </span>
           <div className="bg-white p-5 rounded-xl shadow-md shadow-gray-300 mt-3">
-            <form className="flex flex-col gap-5" >
+            <form className="flex flex-col gap-5">
               <div className="flex flex-col justify-center">
                 <label
                   className="text-base font-semibold text-[#003d4d]"
@@ -52,53 +43,47 @@ export default function InternshipDetails() {
                 </span>
                 <div className="flex justify-start">
                   <div className="w-1/3 flex justify-start">
+                    <input
+                      className="hidden"
+                      type="checkbox"
+                      id="InOffice"
+                      value="InOffice"
+                    />
                     <label
                       className="CheckboxLabel flex justify-center items-center"
                       for="InOffice"
                       id="InOfficeLabel"
                     >
-                      <input
-                        className=""
-                        type="checkbox"
-                        id="InOffice"
-                        value="In Office"
-                        checked={selectedOption === "In Office"}
-                        onChange={handleCheckboxChange}
-                      />
                       In Office
                     </label>
                   </div>
                   <div className="w-1/3 flex justify-start">
+                    <input
+                      type="checkbox"
+                      id="Remote"
+                      className="hidden"
+                      value="Remote"
+                    />
                     <label
                       className="CheckboxLabel flex justify-center items-center"
                       for="Remote"
                       id="RemoteLabel"
                     >
-                      <input
-                        type="checkbox"
-                        id="Remote"
-                        className=""
-                        value="Remote"
-                        checked={selectedOption === "Remote"}
-                        onChange={handleCheckboxChange}
-                      />
                       Remote
                     </label>
                   </div>
                   <div className="w-1/3 flex justify-start">
+                    <input
+                      type="checkbox"
+                      id="Hybrid"
+                      className="hidden"
+                      value="Hybrid"
+                    />
                     <label
                       className="CheckboxLabel flex justify-center items-center"
                       for="Hybrid"
                       id="HybridLabel"
                     >
-                      <input
-                        type="checkbox"
-                        id="Hybrid"
-                        className=""
-                        value="Hybrid"
-                        checked={selectedOption === "Hybrid"}
-                        onChange={handleCheckboxChange}
-                      />
                       Hybrid
                     </label>
                   </div>
@@ -205,7 +190,6 @@ export default function InternshipDetails() {
                   placeholder="Write Responsibilities for selected interns"
                 />
               </div>
-              <button type="submit">Next</button>
             </form>
           </div>
         </div>
