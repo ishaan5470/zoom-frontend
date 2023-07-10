@@ -67,9 +67,9 @@ function App() {
       {/* <JobPosting /> */}
       {/* <ShadowingDetails /> */}
       {/* <ChatPage />*/}
-      <CompanyAdmin id={"64356264fb99aceedccc28d2"} />
+      {/* <CompanyAdmin id={"64356264fb99aceedccc28d2"} /> */}
       {/* <VisitCompany id={"64356264fb99aceedccc28d2"} /> */}
-      {/* <UserProfile id={"64356264fb99aceedccc28d2"} /> */}
+      <UserProfile id={"64ac4a75dad3bcb36edb46be"} />
       {/* <VisitUserProfile id={"64356264fb99aceedccc28d2"} /> */}
     </>
   );

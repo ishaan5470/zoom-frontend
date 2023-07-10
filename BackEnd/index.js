@@ -66,14 +66,31 @@ app.use('/messages', chatRoutes);
 //MONGOOSE SETUP
 const PORT = process.env.PORT || 5000;
 
-mongoose.set("strictQuery", true);
-const DB = process.env.DATABASE_URL.replace('<PASSWORD>', process.env.DATABASE_PASSWORD)
-mongoose
-  .connect(DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("DB connection successful!"));
+// mongoose.set("strictQuery", true);
+// const DB = process.env.DATABASE_URL.replace('<PASSWORD>', process.env.DATABASE_PASSWORD)
+// mongoose
+//   .connect(DB, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => console.log("DB connection successful!"));
+
+const connectionString = 'mongodb+srv://zealyugdb:13579@rajat.6amwvj8.mongodb.net/';
+
+// Establish the database connection
+mongoose.connect(connectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+// Get the default connection
+const db = mongoose.connection;
+
+// Event handlers for connection status
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB database');
+});
 
 // //CREATING SERVER
 const server = http.createServer(app);

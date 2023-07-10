@@ -22,6 +22,8 @@ const router = express.Router();
 // router.get ('/getHomePage', userProfileController.homePagePosts)
 router.post('/getHomePage', userProfileController.homePagePosts)
 
+router.post("/createUserProfile",userProfileController.createUserProfile);
+
 // userprofile routes comes here
 // router.get('/getMyProfile', userProfileController.getMyProfile)
 

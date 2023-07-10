@@ -1,19 +1,19 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const posts = createApi({
-  reducerPath: 'posts',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000' }),
-  tagTypes: ['Post', 'User'],
+  reducerPath: "posts",
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000" }),
+  tagTypes: ["Post", "User"],
   endpoints: (builder) => ({
     fetchPosts: builder.query({
       query: () => ({
-        url: '/users/getAllPosts',
-        method: 'GET',
-      }), providesTags: (result = [], error, arg) => [
-        'Post',
-        ...result.data.data.map(({ _id }) => ({ type: 'Post', _id }))
-      ]
-
+        url: "/users/getAllPosts",
+        method: "GET",
+      }),
+      providesTags: (result = [], error, arg) => [
+        "Post",
+        ...result.data.data.map(({ _id }) => ({ type: "Post", _id })),
+      ],
     }),
     // fetchUserInfo: builder.query({
     //   query: (Id) => ({
@@ -24,11 +24,11 @@ export const posts = createApi({
     // }),
     fetchUserInfo: builder.query({
       query: (Id) => ({
-        url: '/users/getMyProfile',
-        method: 'POST',
+        url: "/users/getMyProfile",
+        method: "POST",
         body: { id: Id },
-
-      }), providesTags: ['User']
+      }),
+      providesTags: ["User"],
     }),
     //Route from home page (Not Integrated yet)
     // fetchHomeInfo: builder.query({
@@ -41,23 +41,37 @@ export const posts = createApi({
     // }),
 
     fetchHomeInfo: builder.query({
-      query: (Id) => ({
-        url: '/users/getAllPosts',
-        method: 'GET',
+      query: () => ({
+        url: "/users/getAllPosts",
+        method: "GET",
       }),
-      providesTags: ['Post']
+      providesTags: ["Post"],
     }),
+
+    /*===========================
+  UPDATE USER PROFILE
+=============================*/
+    updateUserProfile: builder.mutation({
+      query: (formdata) => ({
+        url: "/users/updateUserProfile",
+        method: "POST",
+        body: { ...formdata },
+      }),
+      invalidatesTags: ["User"],
+    }),
+
     createPost: builder.mutation({
       query: (data) => ({
-        url: 'posts',
-        method: 'POST',
+        url: "posts",
+        method: "POST",
         body: data,
-      }), invalidatesTags: ['Post']
+      }),
+      invalidatesTags: ["Post"],
     }),
     followUser: builder.mutation({
       query: (data) => ({
         url: `/users/follow`,
-        method: 'POST',
+        method: "POST",
         body: data,
       }),
     }),
@@ -65,38 +79,48 @@ export const posts = createApi({
       query: (data) => ({
         url: `/users/addLike`,
 
-        method: 'POST',
+        method: "POST",
         body: data,
       }),
-      invalidatesTags: (result, error, arg) => [{ type: 'Post', id: arg._id }]
+      invalidatesTags: (result, error, arg) => [{ type: "Post", id: arg._id }],
     }),
     addCommentToPost: builder.mutation({
       query: (data) => ({
         url: `/users/addComment`,
-        method: 'POST',
+        method: "POST",
         body: data,
       }),
 
-      invalidatesTags: (result, error, arg) => [{ type: 'Post', id: arg._id }],
+      invalidatesTags: (result, error, arg) => [{ type: "Post", id: arg._id }],
     }),
     editPost: builder.mutation({
       query: (data) => ({
         url: `/users/editMyPost`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
       }),
 
-      invalidatesTags: (result, error, arg) => [{ type: 'Post', id: arg._id }],
+      invalidatesTags: (result, error, arg) => [{ type: "Post", id: arg._id }],
     }),
     deletePost: builder.mutation({
       query: (postId) => ({
         url: `posts/deleteMyPost`,
-        method: 'DELETE',
-        invalidatesTags: ['Post']
+        method: "DELETE",
+        invalidatesTags: ["Post"],
       }),
     }),
   }),
 });
 
-export const { useFetchPostsQuery, useFetchHomeInfoQuery, useFetchUserInfoQuery, useCreatePostMutation, useFollowUserMutation, useAddLikeToPostMutation, useAddCommentToPostMutation, useEditPostMutation, useDeletePostMutation } = posts;
-
+export const {
+  useFetchPostsQuery,
+  useFetchHomeInfoQuery,
+  useFetchUserInfoQuery,
+  useUpdateUserProfileMutation,
+  useCreatePostMutation,
+  useFollowUserMutation,
+  useAddLikeToPostMutation,
+  useAddCommentToPostMutation,
+  useEditPostMutation,
+  useDeletePostMutation,
+} = posts;

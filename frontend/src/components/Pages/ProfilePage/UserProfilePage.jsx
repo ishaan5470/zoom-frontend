@@ -22,7 +22,6 @@ import {
 } from "../../../redux/slices/sspost.js";
 
 export default function Profilepage({ id }) {
-
   const [popUp, setPopUp] = useState("");
   const [menu, setMenu] = useState(false);
   const [like, setLike] = useState(0);
@@ -49,7 +48,7 @@ export default function Profilepage({ id }) {
   } = useFetchUserInfoQuery(id);
   const { data, isLoading, isError, isSuccess } = useFetchPostsQuery(id);
 
-  console.log(data1);
+  console.log("data1 : ", data1);
   console.log(data);
   useEffect(() => {
     if (isSuccess && succ) {
@@ -217,13 +216,9 @@ export default function Profilepage({ id }) {
 
       {/* intro Div */}
       <div className={`${popUp === "" ? `opacity-100` : `opacity-20`}`}>
-        <div
-          className={`relative flex justify-center gap-[20px] z-10`}
-        >
+        <div className={`relative flex justify-center gap-[20px] z-10`}>
           <div className="hideScrollbar w-[60%] space-y-10 pt-[15px] px-[15px] box-border">
-            <div
-              className=" justify-center px-10 pt-[8px] bg-white space-x-10 shadow-md shadow-gray-500 rounded-xl"
-            >
+            <div className=" justify-center px-10 pt-[8px] bg-white space-x-10 shadow-md shadow-gray-500 rounded-xl">
               <div className="flex  justify-between">
                 <div className="md:flex-row flex-col flex">
                   <div className="relative  h-[200px] flex items-center justify-center rounded-full">
@@ -240,13 +235,11 @@ export default function Profilepage({ id }) {
                   <div className="flex items-center justify-items-start gap-5 p-5 rounded-xl w-full h-[180px] overflow-hidden">
                     <div className="w-full text-gray-700 space-y-1 ">
                       <div className="flex space-x-5">
-                        <h1 className="  text-3xl ">
-                          {profileInfo.personalInfo.Name}
-                        </h1>
+                        <h1 className="  text-3xl ">{data1.data?.name}</h1>
                         {/* <img src="Images\Profile_badge.png" alt="" className='w-12 h-12' /> */}
                       </div>
 
-                      <h1 className="opacity-80  "> User Name</h1>
+                      <h1 className="opacity-80  "> {data1.data?.userName}</h1>
 
                       <div className="flex ">
                         <BusinessCenterOutlined className="text-[#003d4d]" />
@@ -256,7 +249,9 @@ export default function Profilepage({ id }) {
                       <div className="flex ">
                         <LocationOnOutlined className="text-[#003d4d]" />
                         <h1 className="text-gray-700 opacity-80">
-                          Kolkata,India
+                          {data1.data.location
+                            ? `${data1.data.location}`
+                            : "location"}
                         </h1>
                       </div>
                       <div className="flex space-x-2">
@@ -267,12 +262,12 @@ export default function Profilepage({ id }) {
 
                   <div className="md:relative absolute p-5">
                     <div className="absolute right-0">
-                    <img
-                      src="Images\pen.png"
-                      alt="pen"
-                      className="right-0 w-5 h-5 text-[#003d4d] cursor-pointer  pointer-event-none "
-                      fill="currentColor"
-                    />
+                      <img
+                        src="Images\pen.png"
+                        alt="pen"
+                        className="right-0 w-5 h-5 text-[#003d4d] cursor-pointer  pointer-event-none "
+                        fill="currentColor"
+                      />
                       <button
                         name="Profile"
                         value="Profile"
@@ -629,14 +624,19 @@ export default function Profilepage({ id }) {
                           Add Education Details
                         </h1>
                       </button>
-                      {profileInfo.Education.map((Education) => {
+                      {/* {profileInfo.Education.map((Education) => {
                         return (
                           <InfoCard
                             heading={Education.instituteName}
                             description={Education.instituteDescription}
                           />
                         );
-                      })}
+                      })} */}
+
+                      <InfoCard
+                        heading={data1.data.college}
+                        description={data1.data.stream}
+                      />
                     </div>
 
                     {/* WorkExperience Div */}
@@ -745,7 +745,7 @@ export default function Profilepage({ id }) {
         </div>
       </div>
 
-      <Profile popUp={popUp} handleCancel={handleCancel} />
+      <Profile popUp={popUp} handleCancel={handleCancel} id={id} />
       {/* About  */}
 
       <About popUp={popUp} handleCancel={handleCancel} />

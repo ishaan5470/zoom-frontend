@@ -118,5 +118,4 @@ function Job({ popUp, handleCancel }) {
 
     )
 }
-
-export default Job
+export default Job;
