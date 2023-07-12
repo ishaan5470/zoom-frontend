@@ -12,7 +12,7 @@ export const posts = createApi({
       }),
       providesTags: (result = [], error, arg) => [
         "Post",
-        ...result.data.data.map(({ _id }) => ({ type: "Post", _id })),
+        ...result.data?.data.map(({ _id }) => ({ type: "Post", _id })),
       ],
     }),
     // fetchUserInfo: builder.query({

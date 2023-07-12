@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useUpdateUserProfileMutation } from "../../../../../redux/api/sspost";
+import axios from "axios";
 
 function Profile({ popUp, handleCancel, id }) {
   const [updateUserProfile, isLoading, isError, isSuccess] =
@@ -16,7 +17,7 @@ function Profile({ popUp, handleCancel, id }) {
     const userName = usernameRef.current.value;
     const location = locationRef.current.value;
 
-    const formData = {userid:id,name, userName, location };
+    const formData = { userid: id, name, userName, location };
     updateUserProfile(formData)
       .then((result) => {
         console.log(result);
@@ -24,7 +25,10 @@ function Profile({ popUp, handleCancel, id }) {
       .catch((error) => {
         console.log("error");
       });
-      handleCancel();
+    fullnameRef.current.value = "";
+    usernameRef.current.value = "";
+    locationRef.current.value = "";
+    handleCancel();
   }
 
   return (
@@ -62,7 +66,7 @@ function Profile({ popUp, handleCancel, id }) {
           />
         </div>
 
-        <div className="flex flex-col space-y-5 ">
+        {/* <div className="flex flex-col space-y-5 ">
           <label className="text-left">Profile Picture </label>
           <div className="flex items-center justify-center lg:w-[300px]">
             <label className="flex items-center justify-center w-full bg-[#003d4d]/20  border-2 border-[#003d4d] border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:text-white   hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 ">
@@ -84,10 +88,10 @@ function Profile({ popUp, handleCancel, id }) {
                 </svg>
                 <p className="mb-2  text-gray-500   ">Upload Profile Picture</p>
               </div>
-              <input type="file" className="hidden" />
+              <input type="file" className="" />
             </label>
           </div>
-        </div>
+        </div> */}
 
         <div className="flex flex-col space-y-1 w-full">
           <label className="text-left flex">

@@ -9,6 +9,7 @@ import Job from "./common/Popups/Job.jsx";
 import Education from "./common/Popups/Education.jsx";
 import Internship from "./common/Popups/Internship.jsx";
 import Training from "./common/Popups/Training.jsx";
+import ImageForm from "./common/Popups/ImageForm";
 
 // import LocationOnIcon from '@mui/icons-material/LocationOn';
 import {
@@ -221,11 +222,18 @@ export default function Profilepage({ id }) {
             <div className=" justify-center px-10 pt-[8px] bg-white space-x-10 shadow-md shadow-gray-500 rounded-xl">
               <div className="flex  justify-between">
                 <div className="md:flex-row flex-col flex">
-                  <div className="relative  h-[200px] flex items-center justify-center rounded-full">
+                  <div className="relative  h-[120px] flex items-center justify-center rounded-full">
                     <img
-                      src=""
-                      className="h-[120px] w-[120px]  md:h-[100px] md:w-[100px]  flex items-center justify-center rounded-full border-2 border-gray-400   shadow-md shadow-black"
-                    ></img>
+                      src={new URL(data1.data.profilePhotoUrl, 'http://localhost:8000').href}
+                      className="h-[120px] w-[120px]  md:h-[100px] md:w-[150px]  flex items-center justify-center rounded-full border-2 border-gray-400   shadow-md shadow-black"
+                    />
+                    <img
+                        src="Images\plus.jpg"
+                        alt="pen"
+                        className="absolute bottom-[5px] rounded-full  right-[10px] w-[25px] h-[25px] text-[#003d4d] cursor-pointer  pointer-event-none "
+                        fill="currentColor"
+                        onClick={()=>handleSettings("ImageUpdate")}
+                      />
 
                     {/* <div className="absolute flex items-center justify-center  object-contain overflow-hidden h-[70px] w-[70px] rounded-full top-[60%] left-[90%] -translate-x-1/2">
                                         <img className="" src="Images\videoIcon.png" alt="profileImg" />
@@ -752,16 +760,18 @@ export default function Profilepage({ id }) {
 
       {/* Education Pop Up   */}
 
-      <Job popUp={popUp} handleCancel={handleCancel} />
-      <Education popUp={popUp} handleCancel={handleCancel} />
-      <Internship popUp={popUp} handleCancel={handleCancel} />
+      <Job popUp={popUp} handleCancel={handleCancel} id={id}/>
+      <Education popUp={popUp} handleCancel={handleCancel} id={id}/>
+      <Internship popUp={popUp} handleCancel={handleCancel} id={id}/>
 
       {/* Internships Pop Up  */}
 
       {/* Training and Courses Pop Up  */}
 
-      <Training popUp={popUp} handleCancel={handleCancel} />
+      <Training popUp={popUp} handleCancel={handleCancel} id={id} />
       {/* Job Pop Up  */}
+
+      <ImageForm popUp={popUp} handleCancel={handleCancel} id={id}/>
     </div>
   );
 }

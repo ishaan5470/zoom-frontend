@@ -5,7 +5,6 @@ const sharp = require("sharp");
 const fs = require("fs");
 
 const multerStorage = multer.memoryStorage();
-
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith("image")) {
     cb(null, true);
@@ -41,14 +40,12 @@ exports.resizeUserPhoto = async (req, res, next) => {
 
   next();
 };
-
 const upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter,
 });
 
 exports.uploadUserPhoto = upload.single("profile");
-
 exports.uploadUserPost = upload.single("image");
 
 // exports.updateUserProfile = async (req, res) => {
@@ -113,11 +110,17 @@ exports.createUserProfile = async (req, res) => {
 
 exports.updateUserProfile = async (req, res) => {
   try {
-    const filteredBody = { ...req.body };
-    console.log(filteredBody);
-    if (req.file) {
-      filteredBody.profile = req.file.filename;
+    //const filteredBody = { ...req.body };
+    let filteredBody = {};
+    // if (req.file) {
+    //    filteredBody.profile = req.file.filename;
+    // }
+    for (const key in req.body) {
+      if (req.body.hasOwnProperty(key) && req.body[key] !== "") {
+        filteredBody[key] = req.body[key];
+      }
     }
+    console.log(filteredBody);
     const result = await UserProfile.findByIdAndUpdate(
       req.body.userid,
       { $set: filteredBody },
@@ -125,7 +128,6 @@ exports.updateUserProfile = async (req, res) => {
         new: true,
       }
     );
-    //console.log(result);
     return res.status(200).json({
       status: "success",
       message: {

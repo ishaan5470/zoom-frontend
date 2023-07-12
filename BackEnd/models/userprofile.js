@@ -62,6 +62,9 @@ const userprofile = new schema({
   location: {
     type: String,
   },
+  description: {
+    type: String,
+  },
 
   // education
   degree: {
@@ -73,6 +76,35 @@ const userprofile = new schema({
   stream: {
     type: String,
   },
+  educationStartDate: {
+    type: String,
+  },
+  educationEndDate: {
+    type: String,
+  },
+  profilePhotoUrl: {
+    type: String,
+  },
+
+  jobOrganization: { type: String },
+  jobLocation: { type: String },
+  jobProfile: { type: String },
+  jobStartDate: { type: String },
+  jobEndDate: { type: String },
+  jobDescription: { type: String },
+
+  internshipOrganization: { type: String },
+  internshipLocation: { type: String },
+  internshipProfile: { type: String },
+  internshipStartDate: { type: String },
+  internshipEndDate: { type: String },
+  internshipDescription: { type: String },
+
+  trainingOrganization: { type: String },
+  trainingName: { type: String },
+  trainingStream: { type: String },
+  trainingStartDate: { type: String },
+  trainingEndDate: { type: String },
 });
 const UserProfile = mongoose.model("UserProfile", userprofile);
 module.exports = UserProfile;
