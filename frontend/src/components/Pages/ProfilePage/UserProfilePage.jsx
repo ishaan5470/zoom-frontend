@@ -224,16 +224,21 @@ export default function Profilepage({ id }) {
                 <div className="md:flex-row flex-col flex">
                   <div className="relative  h-[120px] flex items-center justify-center rounded-full">
                     <img
-                      src={new URL(data1.data.profilePhotoUrl, 'http://localhost:8000').href}
+                      src={
+                        new URL(
+                          data1.data.profilePhotoUrl,
+                          "http://localhost:8000"
+                        ).href
+                      }
                       className="h-[120px] w-[120px]  md:h-[100px] md:w-[150px]  flex items-center justify-center rounded-full border-2 border-gray-400   shadow-md shadow-black"
                     />
                     <img
-                        src="Images\plus.jpg"
-                        alt="pen"
-                        className="absolute bottom-[5px] rounded-full  right-[10px] w-[25px] h-[25px] text-[#003d4d] cursor-pointer  pointer-event-none "
-                        fill="currentColor"
-                        onClick={()=>handleSettings("ImageUpdate")}
-                      />
+                      src="Images\plus.jpg"
+                      alt="pen"
+                      className="absolute bottom-[5px] rounded-full  right-[10px] w-[25px] h-[25px] text-[#003d4d] cursor-pointer  pointer-event-none "
+                      fill="currentColor"
+                      onClick={() => handleSettings("ImageUpdate")}
+                    />
 
                     {/* <div className="absolute flex items-center justify-center  object-contain overflow-hidden h-[70px] w-[70px] rounded-full top-[60%] left-[90%] -translate-x-1/2">
                                         <img className="" src="Images\videoIcon.png" alt="profileImg" />
@@ -604,7 +609,13 @@ export default function Profilepage({ id }) {
                       />
                       <div className="flex space-x-10 rounded-full overflow-x-hidden ">
                         {profileInfo.skills.map((skill) => {
-                          return <InfoCard heading={skill.skillName} />;
+                          return (
+                            <InfoCard
+                              heading={skill.skillName}
+                              tab="Skills"
+                              data={data1.data}
+                            />
+                          );
                         })}
                       </div>
                     </div>
@@ -644,6 +655,8 @@ export default function Profilepage({ id }) {
                       <InfoCard
                         heading={data1.data.college}
                         description={data1.data.stream}
+                        tab="Education"
+                        data={data1.data}
                       />
                     </div>
 
@@ -687,14 +700,17 @@ export default function Profilepage({ id }) {
                           </h1>
                         </button>
                       </div>
-                      {profileInfo.WorkExp.map((Work) => {
+                      {/* {profileInfo.WorkExp.map((Work) => {
                         return (
                           <InfoCard
                             heading={Work.jobDesignation}
                             description={Work.jobExperience}
+                            tab="Job"
+                            data={data1.data}
                           />
                         );
-                      })}
+                      })} */}
+                      <InfoCard tab="Job" data={data1.data} />
                     </div>
 
                     {/* Certification  */}
@@ -719,14 +735,20 @@ export default function Profilepage({ id }) {
                           Add Certification Details
                         </h1>
                       </button>
-                      {profileInfo.Certification.map((Certification) => {
+                      {/* {profileInfo.Certification.map((Certification) => {
                         return (
                           <InfoCard
                             heading={Certification.CertificationName}
                             description={Certification.Description}
+                            tab="Certification"
+                            data={data1.data}
                           />
                         );
-                      })}
+                      })} */}
+                      <InfoCard
+                        tab="Certification"
+                        data={data1.data}
+                      />
                     </div>
 
                     {/* Skills Post Div */}
@@ -760,9 +782,9 @@ export default function Profilepage({ id }) {
 
       {/* Education Pop Up   */}
 
-      <Job popUp={popUp} handleCancel={handleCancel} id={id}/>
-      <Education popUp={popUp} handleCancel={handleCancel} id={id}/>
-      <Internship popUp={popUp} handleCancel={handleCancel} id={id}/>
+      <Job popUp={popUp} handleCancel={handleCancel} id={id} />
+      <Education popUp={popUp} handleCancel={handleCancel} id={id} />
+      <Internship popUp={popUp} handleCancel={handleCancel} id={id} />
 
       {/* Internships Pop Up  */}
 
@@ -771,7 +793,7 @@ export default function Profilepage({ id }) {
       <Training popUp={popUp} handleCancel={handleCancel} id={id} />
       {/* Job Pop Up  */}
 
-      <ImageForm popUp={popUp} handleCancel={handleCancel} id={id}/>
+      <ImageForm popUp={popUp} handleCancel={handleCancel} id={id} />
     </div>
   );
 }
