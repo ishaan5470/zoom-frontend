@@ -1,74 +1,37 @@
-// REQUIRING MODULES
-const Post = require("../models/Post");
-const Company = require("../models/Company");
-const jwt = require("jsonwebtoken");
-const ObjectId = require('mongoose').Types.ObjectId;
+const multer = require("multer");
+const UserProfile = require("./models/userprofile");
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/uploads/posts"); // Set the upload directory
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname); // Set the file name
+  },
+});
 
-/* CREATE */
-exports.createPost = async (req, res) => {
-  const id=req.user._id;
-  try {
-          const company = await Company.findOne({ userid: id});
-          if (company) {
-            const book = await Post.create({
-              companyId:company._id,
-              logo:company.logo,
-              ...req.body
-            });
-            return res.status(201).json({
-              status: "success",
-              message: "Job Successfully Posted",
-              book,
-            });
-          } else {
-            res
-              .status(404)
-              .json({ status: "error", message: "No Company Found" });
-          }
-        }
-      
-   catch (error) {
-    res.status(409).json({ status: "error", message: error.message });
-  } 
-};
+const upload = multer({ storage: storage });
 
-/* READ */
-exports.getPosts = async (req, res) => {
-  try {
-    const id=req.user._id;
-    const company = await Company.findOne({ userid: id});
-    const data = await Post.find({ companyId: company._id});
-    res.status(200).json({ status: "success", data });
-  } catch (error) {
-    res.status(404).json({ status: "error", message: error.message });
+/*===================================
+  CREATE POST ACTION
+=====================================*/
+app.post("/skills/createpost", upload.single("photo"), async (req, res) => {
+  if (!req.file) {
+    return res.status(400).send("No file uploaded.");
   }
-};
+  const newPost = new UserPost({
+    userId: req.body.id,
+    userName: req.body.userName,
+    postDescription: req.body.postDescription,
+    likes: [],
+    comment: [],
+    postImage: `/uploads/posts/${req.file.filename}`,
+  });
 
-/* UPDATE */
-exports.updatePost = async (req, res) => {
-  //console.log(req.body);
   try {
-    const updatedPost = await Post.findOneAndUpdate(
-      { _id: req.params.id },
-      req.body,
-      
-    );
-    res.status(200).json({ status: "success", message:"Update Successfully", updatedPost })
+    await newPost.save();
+    res.send("Post uploaded successfully.");
   } catch (error) {
-    console.log(error);
-    res.status(404).json({ status: "error", message: error.message });
+    console.error(error);
+    res.status(500).send("Error saving the post.");
   }
-};
-
-/* DELETE */
-exports.deletePost = async (req, res) => {
-  //console.log(req.params);
-  try {
-    const { id } = req.params;
-    const post = await Post.deleteOne({ _id: id });
-    res.status(200).json({ status: "success", message: "Delete Successfully" });
-  } catch (error) {
-    console.log(error);
-    res.status(404).json({ message: error.message });
-  }
-};
+});

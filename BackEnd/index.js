@@ -70,15 +70,6 @@ app.use("/messages", chatRoutes);
 //MONGOOSE SETUP
 const PORT = process.env.PORT || 5000;
 
-// mongoose.set("strictQuery", true);
-// const DB = process.env.DATABASE_URL.replace('<PASSWORD>', process.env.DATABASE_PASSWORD)
-// mongoose
-//   .connect(DB, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => console.log("DB connection successful!"));
-
 const connectionString =
   "mongodb+srv://zealyugdb:13579@rajat.6amwvj8.mongodb.net/";
 
@@ -100,57 +91,10 @@ db.once("open", () => {
 // //CREATING SERVER
 const server = http.createServer(app);
 
-// // Setting sockets connection
-// const io = new Server(server, {
-//   cors: {
-//     origin: "http://localhost:3000",
-//   },
-// });
-
-// io.on("connection", (socket) => {
-//   socket.on('join_room', (room) => {
-//     socket.join(room)
-//     console.log('User Joined Room: ' + room)
-//   })
-
-//   socket.on('send_message', async (data) => {
-//     try {
-//       const { room, message } = data
-//       /*
-//         Storing message in given room here!
-//       */
-//       const sender = await UserProfile.findOne({ userid: req.user._id })
-//       // const sender = await UserProfile.findOne({_id: "64356277fb99aceedccc28d7"})
-//       const messageData = await Message.findOne({ roomid: room })
-//       const newMessage = {
-//         data: message,
-//         userid: sender._id,
-//         time: Date.now() - 1000
-//       }
-//       let messageChats = [...messageData.message, newMessage]
-
-//       // updating in database
-//       await Message.updateOne({ roomid: room }, { $set: { message: messageChats } })
-
-//       // Sending received message!
-//       socket.to(room).emit('receive_message', newMessage)
-
-//     } catch (err) {
-//       console.log('Socket logic failed somewhere...', err)
-//     }
-//   })
-
-//   // disconnect a user
-//   socket.on('disconnect', () => {
-//     console.log('User Disconnected')
-//   })
-
-// });
-
 const UserProfile = require("./models/userprofile");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "public/uploads"); // Set the upload directory
+    cb(null, "public/uploads/posts"); // Set the upload directory
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + "-" + file.originalname); // Set the file name
@@ -159,8 +103,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Define a route for file upload
+/*=================================
+  USER PROFILE - FILE UPLOAD ACTION
+===================================*/
 app.post("/upload", upload.single("photo"), async (req, res) => {
+  console.log(req.file);
   if (!req.file) {
     return res.status(400).send("No file uploaded.");
   }
@@ -180,8 +127,8 @@ app.post("/upload", upload.single("photo"), async (req, res) => {
   }
 });
 
+const UserPost = require("./models/UserPost");
+
+
 // server.listen(8080, () => console.log("app is listening at 8080"));
 server.listen(8000, () => console.log("app is listening at 8000"));
-
-// exporting io
-// module.exports = io

@@ -36,6 +36,7 @@ router.post(
   userProfileController.updateUserProfile
 );
 
+
 // userpost routes
 // router.get('/getMyPosts', userProfileController.getMyPosts)
 router.post("/getMyPosts", userProfileController.getMyPosts);
