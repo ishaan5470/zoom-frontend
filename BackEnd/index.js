@@ -14,16 +14,16 @@ const { Server } = require("socket.io");
 // const cookieParser = require('cookie-parser');
 
 //Routes
-const loginRoutes = require("./routes/loginRoutes");
-const registerRoutes = require("./routes/registerRoute");
-const chatRoutes = require("./routes/chatRoutes");
-
-const jobs = require("./routes/jobs");
-const mainjob = require("./routes/postRoutes");
-const userProfileRoutes = require("./routes/userProfileRoutes");
-const resume = require("./routes/resume");
-const company = require("./routes/company");
-const posts = require("./routes/postRoutes");
+// const loginRoutes = require("./routes/loginRoutes");
+// const registerRoutes = require("./routes/registerRoute");
+// const chatRoutes = require("./routes/chatRoutes");
+const skillSharingRoutes = require("./routes/skillSharingRoutes");
+// const jobs = require("./routes/jobs");
+// const mainjob = require("./routes/postRoutes");
+// const userProfileRoutes = require("./routes/userProfileRoutes");
+// const resume = require("./routes/resume");
+// const company = require("./routes/company");
+// const posts = require("./routes/postRoutes");
 
 const multer = require("multer");
 app.use(express.static("public"));
@@ -57,24 +57,24 @@ app.use(
 app.use(express.static(path.join(__dirname, "public")));
 
 //ROUTES
-app.use("/users", userProfileRoutes);
-app.use("/resume", resume);
-app.use("/jobs", jobs);
-app.use("/company", company);
-app.use("/posts", posts);
-app.use("/", mainjob);
-
-app.use("/registeration", registerRoutes);
-app.use("/login", loginRoutes);
-app.use("/messages", chatRoutes);
+// app.use("/users", userProfileRoutes);
+// app.use("/resume", resume);
+// app.use("/jobs", jobs);
+// app.use("/company", company);
+// app.use("/posts", posts);
+// app.use("/", mainjob);
+app.use("/skills",skillSharingRoutes)
+// app.use("/registeration", registerRoutes);
+// app.use("/login", loginRoutes);
+// app.use("/messages", chatRoutes);
 //MONGOOSE SETUP
 const PORT = process.env.PORT || 5000;
 
-const connectionString =
-  "mongodb+srv://zealyugdb:13579@rajat.6amwvj8.mongodb.net/";
+// const connectionString =
+//   "mongodb+srv://zealyugdb:13579@rajat.6amwvj8.mongodb.net/";
 
 // Establish the database connection
-mongoose.connect(connectionString, {
+mongoose.connect("mongodb+srv://admin:12345@atlascluster.ahs5ujp.mongodb.net/Users", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -91,43 +91,43 @@ db.once("open", () => {
 // //CREATING SERVER
 const server = http.createServer(app);
 
-const UserProfile = require("./models/userprofile");
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/uploads/posts"); // Set the upload directory
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname); // Set the file name
-  },
-});
+// const UserProfile = require("./models/userprofile");
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "public/uploads/posts"); // Set the upload directory
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + "-" + file.originalname); // Set the file name
+//   },
+// });
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
 
-/*=================================
-  USER PROFILE - FILE UPLOAD ACTION
-===================================*/
-app.post("/upload", upload.single("photo"), async (req, res) => {
-  console.log(req.file);
-  if (!req.file) {
-    return res.status(400).send("No file uploaded.");
-  }
-  const updatedUser = await UserProfile.findByIdAndUpdate(req.body.id, {
-    profilePhotoUrl: `/uploads/${req.file.filename}`,
-  });
-  if (updatedUser.profilePhotoUrl) {
-    const previousImage = `public${updatedUser.profilePhotoUrl}`;
-    fs.unlinkSync(previousImage);
-  }
-  try {
-    await updatedUser.save();
-    res.send("File uploaded successfully.");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error saving the image URL.");
-  }
-});
+// /*=================================
+//   USER PROFILE - FILE UPLOAD ACTION
+// ===================================*/
+// app.post("/upload", upload.single("photo"), async (req, res) => {
+//   console.log(req.file);
+//   if (!req.file) {
+//     return res.status(400).send("No file uploaded.");
+//   }
+//   const updatedUser = await UserProfile.findByIdAndUpdate(req.body.id, {
+//     profilePhotoUrl: `/uploads/${req.file.filename}`,
+//   });
+//   if (updatedUser.profilePhotoUrl) {
+//     const previousImage = `public${updatedUser.profilePhotoUrl}`;
+//     fs.unlinkSync(previousImage);
+//   }
+//   try {
+//     await updatedUser.save();
+//     res.send("File uploaded successfully.");
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("Error saving the image URL.");
+//   }
+// });
 
-const UserPost = require("./models/UserPost");
+// const UserPost = require("./models/UserPost");
 
 
 // server.listen(8080, () => console.log("app is listening at 8080"));

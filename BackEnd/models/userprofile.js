@@ -1,7 +1,16 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
+const followingSchema = new schema({
+  userId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"User"
+  }
+})
 const userprofile = new schema({
-  userid: { type: String },
+  userid: { 
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"User"
+  },
 
   name: {
     type: String,
@@ -46,8 +55,8 @@ const userprofile = new schema({
     type: String,
     default: "",
   },
-  followers: [{ type: String }],
-  following: [{ type: String }],
+  followers: [followingSchema],
+  following: [followingSchema],
   requests: [{ type: String }],
   private: {
     type: Boolean,

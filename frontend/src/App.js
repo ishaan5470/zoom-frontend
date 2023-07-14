@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Header />
-      <Home id="64ac4a75dad3bcb36edb46be"/>
+      <Home />
     </>
   );
 }

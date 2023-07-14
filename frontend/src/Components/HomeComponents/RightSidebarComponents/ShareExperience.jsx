@@ -3,7 +3,7 @@ import { Dialog, DialogContent } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Upload from './shareExperienceComponents/Upload';
 
-const ShareExperience=({id})=>{
+const ShareExperience=()=>{
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -58,7 +58,7 @@ const ShareExperience=({id})=>{
           <div className="flex justify-center mb-5 ">
             <button onClick={()=>{setOpen1(!open1)}} className='text-white border-2 px-5 py-1.5 rounded-full bg-gradient-to-r from-[#003D4D] to-[#57A7B3]'>Next</button>
           </div>
-          {open1 === true && <Upload id={id} typeOfPost={typeOfPost} handleClose={handleClose1} mast={handleClose} open2={open2} setOpen2={setOpen2} open1={open1} />}
+          {open1 === true && <Upload typeOfPost={typeOfPost} handleClose={handleClose1} mast={handleClose} open2={open2} setOpen2={setOpen2} open1={open1} />}
         </DialogContent>
       </Dialog>
 

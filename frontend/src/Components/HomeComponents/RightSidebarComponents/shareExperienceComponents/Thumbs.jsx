@@ -1,11 +1,6 @@
 import { Dialog, DialogContent } from '@mui/material';
 
 export default function Thumbs({ mast, open }) {
-
-
-
-
-
   return (
     <>
       <Dialog open={open} onClose={mast} fullWidth maxWidth="sm" className='backdrop-blur-sm'>
