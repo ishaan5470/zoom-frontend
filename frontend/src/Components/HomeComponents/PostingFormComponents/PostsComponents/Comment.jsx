@@ -33,7 +33,7 @@ export default function Comment({ com, pid, uid }) {
 
           <div className="flex flex-col items-center">
             <p className=' sm:flex hidden ml-1 font-normal'> Comment</p>
-            <div className='font-thin text-[14px] leading-3 mr-auto ml-1'>{com.length}</div>
+            <div className='font-thin text-[14px] leading-3 mr-auto ml-1'>10k</div>
           </div>
         </span>
       </button>
@@ -45,17 +45,16 @@ export default function Comment({ com, pid, uid }) {
           </button> */}
         </div>
         <DialogContent>
+          <Comlist />
 
-
-          {com.map((com) => (
+          {/* {com.map((com) => (
             <React.Fragment key={com.commentUserId}>
               <Comlist com={com} />
             </React.Fragment>
-          ))}
+          ))} */}
         </DialogContent>
         <div className="bg-white h-[10rem] pt-6 px-8 ">
-
-          <Combar pid={pid} uid={uid} />
+          <Combar/>
         </div>
       </Dialog>
     </>

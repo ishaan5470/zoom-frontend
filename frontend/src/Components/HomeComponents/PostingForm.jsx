@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 // import Posts from './Posts';
 // import Combar from './Comments/Combar';
-import Posts from "./PostingFormComponents/Posts";
-import {
-  useFetchUserInfoMutation,
-  useFetchHomeInfoMutation,
-} from "../../redux/api/sspost";
+// import Posts from "./PostingFormComponents/Posts";
+// import {
+//   useFetchUserInfoMutation,
+//   useFetchHomeInfoMutation,
+// } from "../../redux/api/sspost";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-export default function Post({ id }) {
+export default function Post() {
   const { userId, userName } = useSelector((state) => state.user);
 
   // const [ userInfo , {data,isLoading,isSuccess,isError,error} ] = useFetchUserInfoMutation();
@@ -27,19 +27,19 @@ export default function Post({ id }) {
   // }, []);
   let postData = [];
 
-  useEffect(async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/users/getMyPosts/",
-        { id }
-      );
+  // useEffect(async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:8000/users/getMyPosts/",
+  //       { id }
+  //     );
 
-      postData = response.data.data.data;
-      console.log(postData);
-    } catch (error) {
-      console.error(error);
-    }
-  });
+  //     postData = response.data.data.data;
+  //     console.log(postData);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // });
 
   // if (isLoading) {
   //   return (
@@ -69,9 +69,10 @@ export default function Post({ id }) {
               <Combar pid={post._id} uid={userId} />
             </React.Fragment>
           ))} */}
-          {postData.map((post) => (
+          {/* {postData.map((post) => (
             <Post post={post} />
-          ))}
+          ))} */}
+          <Post />
         </div>
       </div>
     );

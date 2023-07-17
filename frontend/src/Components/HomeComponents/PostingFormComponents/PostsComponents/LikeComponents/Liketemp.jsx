@@ -1,7 +1,7 @@
 import React from 'react'
-import { useFetchUserInfoMutation } from '../../../../../redux/api/sspost';
+// import { useFetchUserInfoMutation } from '../../../../../redux/api/sspost';
 
-function Liketemp({ uid }) {
+function Liketemp() {
 
 
 

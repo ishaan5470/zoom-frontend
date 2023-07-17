@@ -1,16 +1,16 @@
 
 import { useEffect, useState } from 'react';
-import { useFetchUserInfoMutation} from '../../redux/api/sspost';
+// import { useFetchUserInfoMutation} from '../../redux/api/sspost';
 import { useSelector } from 'react-redux';
 const Profilepre = ()=>{
-  const [userInfo ,{ data, isLoading, isError, error }] = useFetchUserInfoMutation();
+  // const [userInfo ,{ data, isLoading, isError, error }] = useFetchUserInfoMutation();
   const {id,userName} = useSelector((state=>state.user))
-  useEffect(()=>{
-    const userData = async ()=>{
-      userInfo({id})
-    }
-    userData();
-  },[])
+  // useEffect(()=>{
+  //   const userData = async ()=>{
+  //     userInfo({id})
+  //   }
+  //   userData();
+  // },[])
   const [moreFlag,setMoreFlag] = useState(false);
   // console.log(data)
   // const user = data
